@@ -1,196 +1,55 @@
 #include "problem.h"
-#include <stdlib.h>
-#include <math.h>
 
-problem::problem(){
-    parent = NULL;
-    num_rows = number_rows;
-    num_columns = number_columns;
-    boardSize = board_size;
+int main(){
+    std::vector<int> problemB = {};
+    std::vector<int> solution = {};
+    
+    setup(solution, problemB);
+    problem* tileBoard = new problem(problemB, number_rows, number_columns);
 
-    generateSolutionBoard(currBoard);
-    generateSolutionBoard(goalBoard);
+    std::cout << "Misplaced Tiles: " << tileBoard->misplacedCost() << std::endl;   
+    std::cout << "Manhattan Distance: " << tileBoard->euclideanCost() << std::endl;
 
-    totalCost = heuristic = gDistance = 0;
-}
-
-problem::problem(std::vector<int> v, int rows, int columns){
-    num_rows = rows;
-    num_columns = columns;
-    boardSize = num_rows * num_columns;
-    totalCost = gDistance = 0;
-
-    currBoard = v;
-    generateSolutionBoard(goalBoard);
-
-}
-
-int problem::findBlankIndex(){
-    int index;
-
-    for(int i = 0; i < boardSize; ++i){
-        if(currBoard.at(i) == 0){
-            index = i;
-        }
-    }
-    return index;
-}
-
-int problem::misplacedCost(){
-    int count = 0;
-
-    for(int i = 0; i < boardSize - 1; i++){
-        if(currBoard.at(i) != goalBoard.at(i)){
-            count++;
-        }
-    }
-    return count;
-}
-
-int problem::euclideanCost(){
-    // Manhattan Distance Formula given by: sqrt((a1 - b1)^2 + (a2-b2)^2)
-
-    int count = 0;
-    int currX, currY;
-    int trueX, trueY;
-    int distX, distY;
-    int manhattan;
-    bool cYDone, tYDone = false;
-
-    for(int i = 0; i < boardSize; i++){
-        if(currBoard.at(i) == 0){
-            continue;
-        }
-        else if(currBoard.at(i) != goalBoard.at(i)){
-            currX = ((i+1) % num_columns == 0) ? num_columns : (i + 1) % num_columns;
-            trueX = (currBoard.at(i) % num_columns == 0) ? num_columns : currBoard.at(i) % num_columns;
-
-            cYDone = tYDone = false;
-
-            for(int j = 1; j < num_rows + 1; j++){
-                if((i < j * num_columns) && !cYDone){
-                    currY = j;
-                    cYDone = true;
+    char menu_input = ' ';
+    while(menu_input != 'q'){
+        std::cout << " -- Menu --\n[W] - Move Blank Up\n[A] - Move Left\n[S] - Move Down\n[D] - Move Right\n";
+        std::cout << "[R] - Print Previous Board\n[P] - Print Current Board\n[Q] - Quit\n";
+        std::cin >> menu_input;
+        switch(menu_input){
+            case 'w':
+                tileBoard = (tileBoard->moveUp() == NULL) ? tileBoard : tileBoard->moveUp();
+                tileBoard->print();
+                break;
+            case 'a':
+                tileBoard = (tileBoard->moveLeft() == NULL) ? tileBoard : tileBoard->moveDown();
+                tileBoard->print();
+                break;
+            case 's':
+                tileBoard = (tileBoard->moveDown() == NULL) ? tileBoard : tileBoard->moveDown();
+                tileBoard->print();
+                break;
+            case 'd':
+                tileBoard = (tileBoard->moveRight() == NULL) ? tileBoard : tileBoard->moveRight();
+                tileBoard->print();
+                break;
+            case 'r':
+                std::cout << "-- PREVIOUS BOARD -- \n";
+                if(tileBoard->parent != NULL)
+                    tileBoard->parent->print();
+                else{
+                    std::cout << "No Previous Board\n";
                 }
-                if((currBoard.at(i) < j * num_columns) && !tYDone){
-                    trueY = j;
-                    tYDone = true;
-                }
-            }
-
-            distX = currX - trueX;
-            distY = currY - trueY;
-
-            distX = abs(distX);
-            distY = abs(distY);
-
-            manhattan = sqrt(pow(distX, 2) + pow(distY, 2));
-
-            count += manhattan;
+                break;
+            case 'p':
+                std::cout << " -- CURRENT BOARD --\n";
+                tileBoard->print();
+                std::cout << std::endl;
+                break;
+            case 'q':
+                break;
+            default:
+                std::cout << "Invalid Input, try again!\n";
+                break;
         }
     }
-
-    return count;
-}
-
-// Note, the direction of the move corresponds to where the BLANK SPACE is moving!
-
-problem* problem::moveUp(){
-    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
-    int blankIndex = findBlankIndex();
-
-    // If the blank piece is in the first row, it can't move "up"
-    if(blankIndex < num_columns){
-        return NULL;
-    }
-    else{
-        
-        // If there is an empty piece in the middle (Index 4), we'd want to move the piece above it
-        // down, so index 1.  Therefore, we "swap" the empty piece and the piece above it.  Moving the
-        // Empty piece "up"
-        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex - num_columns));
-        movePiece->parent = this;
-        movePiece->gDistance = this->gDistance + 1;
-        return movePiece;
-
-    }
-
-}
-
-problem* problem::moveLeft(){
-    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
-    int blankIndex = findBlankIndex();
-
-    // If the blank piece is on the outermost column, it can't move left!
-    // 0, 3, or 6 can't move left!
-    if(blankIndex % num_columns == 0){
-        return NULL;
-    }
-    else{
-
-        // If there is an empty space in the middle (Index 4), we'd want to move the piece to the left of 
-        // it (Index 3) to the right.  Therefore, we swap the empty piece and the leftmost piece, moving the
-        // empty piece "Left"
-        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex - 1));
-        movePiece->parent = this;
-        movePiece->gDistance = this->gDistance + 1;
-        return movePiece;
-    }
-
-}
-
-problem* problem::moveDown(){
-    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
-    int blankIndex = findBlankIndex();
-
-    // If the blank piece is in the last row, it can't move "up"
-    // num_columns * num_columns - 1 = 3 * (3 - 1) = 6, so if it's index is greater-equal than 6 it's invalid
-    if(blankIndex >= (num_columns*(num_columns - 1))){
-        return NULL;
-    }
-    else{
-        
-        // If there is an empty piece in the middle (Index 4), we'd want to move the piece below it
-        // down, so index 7.  Therefore, we "swap" the empty piece and the piece below it.  Moving the
-        // Empty piece "down"
-        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex + num_columns));
-        movePiece->parent = this;
-        movePiece->gDistance = this->gDistance + 1;
-        return movePiece;
-
-    }
-
-}
-
-problem* problem::moveRight(){
-    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
-    int blankIndex = findBlankIndex();
-
-    // If the blank piece is on the outermost column, it can't move left!
-    // 2, 5, or 8 can't move left!
-    // This is the same as saying 3, 6, and 9 can't move...so index + 1!
-    if((blankIndex + 1) % num_columns == 0){
-        return NULL;
-    }
-    else{
-
-        // If there is an empty space in the middle (Index 4), we'd want to move the piece to the right of 
-        // it (Index 5) to the left.  Therefore, we swap the empty piece and the rightmost piece, moving the
-        // empty piece "right"
-        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex + 1));
-        movePiece->parent = this;
-        movePiece->gDistance = this->gDistance + 1;
-        return movePiece;
-    }
-
-}
-
-void problem::print(){
-    for(int i = 0; i < boardSize; ++i){
-        if(i % num_columns == 0){
-            std::cout << std::endl;
-        }
-        std::cout << currBoard.at(i) << ' ';
-    }
-    std::cout << std::endl;
 }
