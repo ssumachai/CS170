@@ -17,13 +17,15 @@ class problem{
         problem* parent;
         double totalCost;           // f(n) = g(n) + h(n)
         double heuristic;           // h(n) = estimated distance from n to the goal
-        double gDistance;            // g(n) = cost to get from node n from initial state
+        double gDistance;           // g(n) = cost to get from node n from initial state
+        int findBlankIndex();
         problem* moveUp();
         problem* moveDown();
         problem* moveLeft();
         problem* moveRight();
         int misplacedCost();
         int euclideanCost();
+        void print();
 
 };
 

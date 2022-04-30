@@ -25,6 +25,17 @@ problem::problem(std::vector<int> v, int rows, int columns){
 
 }
 
+int problem::findBlankIndex(){
+    int index;
+
+    for(int i = 0; i < boardSize; ++i){
+        if(currBoard.at(i) == 0){
+            index = i;
+        }
+    }
+    return index;
+}
+
 int problem::misplacedCost(){
     int count = 0;
 
@@ -80,4 +91,106 @@ int problem::euclideanCost(){
     }
 
     return count;
+}
+
+// Note, the direction of the move corresponds to where the BLANK SPACE is moving!
+
+problem* problem::moveUp(){
+    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
+    int blankIndex = findBlankIndex();
+
+    // If the blank piece is in the first row, it can't move "up"
+    if(blankIndex < num_columns){
+        return NULL;
+    }
+    else{
+        
+        // If there is an empty piece in the middle (Index 4), we'd want to move the piece above it
+        // down, so index 1.  Therefore, we "swap" the empty piece and the piece above it.  Moving the
+        // Empty piece "up"
+        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex - num_columns));
+        movePiece->parent = this;
+        movePiece->gDistance = this->gDistance + 1;
+        return movePiece;
+
+    }
+
+}
+
+problem* problem::moveLeft(){
+    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
+    int blankIndex = findBlankIndex();
+
+    // If the blank piece is on the outermost column, it can't move left!
+    // 0, 3, or 6 can't move left!
+    if(blankIndex % num_columns == 0){
+        return NULL;
+    }
+    else{
+
+        // If there is an empty space in the middle (Index 4), we'd want to move the piece to the left of 
+        // it (Index 3) to the right.  Therefore, we swap the empty piece and the leftmost piece, moving the
+        // empty piece "Left"
+        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex - 1));
+        movePiece->parent = this;
+        movePiece->gDistance = this->gDistance + 1;
+        return movePiece;
+    }
+
+}
+
+problem* problem::moveDown(){
+    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
+    int blankIndex = findBlankIndex();
+
+    // If the blank piece is in the last row, it can't move "up"
+    // num_columns * num_columns - 1 = 3 * (3 - 1) = 6, so if it's index is greater-equal than 6 it's invalid
+    if(blankIndex >= (num_columns*(num_columns - 1))){
+        return NULL;
+    }
+    else{
+        
+        // If there is an empty piece in the middle (Index 4), we'd want to move the piece below it
+        // down, so index 7.  Therefore, we "swap" the empty piece and the piece below it.  Moving the
+        // Empty piece "down"
+        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex + num_columns));
+        movePiece->parent = this;
+        movePiece->gDistance = this->gDistance + 1;
+        return movePiece;
+
+    }
+
+}
+
+problem* problem::moveRight(){
+    problem* movePiece = new problem(this->currBoard, num_rows, num_columns);
+    int blankIndex = findBlankIndex();
+
+    // If the blank piece is on the outermost column, it can't move left!
+    // 2, 5, or 8 can't move left!
+    // This is the same as saying 3, 6, and 9 can't move...so index + 1!
+    if((blankIndex + 1) % num_columns == 0){
+        return NULL;
+    }
+    else{
+
+        // If there is an empty space in the middle (Index 4), we'd want to move the piece to the right of 
+        // it (Index 5) to the left.  Therefore, we swap the empty piece and the rightmost piece, moving the
+        // empty piece "right"
+        std::swap(movePiece->currBoard.at(blankIndex), movePiece->currBoard.at(blankIndex + 1));
+        movePiece->parent = this;
+        movePiece->gDistance = this->gDistance + 1;
+        return movePiece;
+    }
+
+}
+
+void problem::print(){
+    for(int i = 0; i < boardSize; ++i){
+        if(i % num_columns == 0){
+            std::cout << std::endl;
+        }
+        std::cout << currBoard.at(i) << ' ';
+    }
+    std::cout << std::endl;
 }
