@@ -29,6 +29,23 @@ class problem{
         int euclideanCost();
         void print();
         void queuesort(std::vector<problem*> &statequeue);
+        void determineDirection(int value);
+        std::vector<int> getCurrBoard();
 };
+
+struct MoveCost{
+    bool operator()(problem* const b1, problem* const b2){
+        if(b1->totalCost == b2->totalCost){
+            if(b1->gDistance < b2->gDistance){
+                return false;
+            }
+        }
+        else{
+            return b1->totalCost > b2->totalCost;
+        }
+    }
+};
+
+bool searchRepeats(problem* currentTile, const std::vector<problem*> repeats);
 
 #endif

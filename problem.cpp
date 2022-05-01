@@ -207,3 +207,26 @@ void problem::print(){
     }
     std::cout << std::endl;
 }
+
+void problem::determineDirection(int value){
+    switch(value){
+        case 0:
+            this->direction = "Up";
+            break;
+        case 1:
+            this->direction = "Down";
+            break;
+        case 2:
+            this->direction = "Left";
+            break;
+        case 3:
+            this->direction = "Right";
+            break;
+        default:
+            break;
+    }
+}
+
+std::vector<int> problem::getCurrBoard(){
+    return this->currBoard;
+}

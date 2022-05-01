@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <queue>
+#include <set>
 
 const int number_rows = 3;
 const int number_columns = 3;
