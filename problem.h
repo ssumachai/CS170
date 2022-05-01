@@ -19,6 +19,8 @@ class problem{
         double heuristic;           // h(n) = estimated distance from n to the goal
         double gDistance;           // g(n) = cost to get from node n from initial state
         int findBlankIndex();
+        bool solutionfound();
+        std::string direction;
         problem* moveUp();
         problem* moveDown();
         problem* moveLeft();
@@ -26,7 +28,7 @@ class problem{
         int misplacedCost();
         int euclideanCost();
         void print();
-
+        void queuesort(std::vector<problem*> &statequeue);
 };
 
 #endif

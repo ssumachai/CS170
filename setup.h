@@ -15,6 +15,6 @@ bool checkBoardInput(std::vector<int> gameBoard);
 void generateSolutionBoard(std::vector<int> &solBoard);
 void takeRowInput(std::vector<int> &board);
 void generateProblemBoard(int boardChoice, std::vector<int> &problemBoard);
-void setup(std::vector<int> &sBoard, std::vector<int> &pBoard);
+int setup(std::vector<int> &sBoard, std::vector<int> &pBoard);
 
 #endif

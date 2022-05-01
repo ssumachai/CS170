@@ -59,7 +59,7 @@ void generateProblemBoard(int boardChoice, std::vector<int> &problemBoard){
     }
 }
 
-void setup(std::vector<int> &sBoard, std::vector<int> &pBoard){
+int setup(std::vector<int> &sBoard, std::vector<int> &pBoard){
     int boardInput = 0;
     bool board_select, algo_select = false;
     std::string temp_message;
@@ -113,7 +113,7 @@ void setup(std::vector<int> &sBoard, std::vector<int> &pBoard){
                 break;
         }
     }
-
     std::cout << temp_message;
     
+    return boardInput;
 }
