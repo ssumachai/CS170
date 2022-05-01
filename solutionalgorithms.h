@@ -31,7 +31,6 @@ bool checkSets(problem* move, std::set<vector<int>> explored, std::set<vector<in
 //UNIFORM COST SEARCH
 problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    problem* goalNode = NULL;
     std::set<vector<int>> foundSet;
 
     std::cout << "Expanding state";
@@ -54,8 +53,8 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vecto
         }
         statequeue.pop();
 
-        if(goalNode != NULL && (goalNode->solutionfound() && (goalNode->totalCost <= statequeue.top()->totalCost))){
-            return goalNode;
+        if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
+            return initial_state;
         }
 
         repeats.insert(initial_state->getCurrBoard());
@@ -76,10 +75,6 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vecto
                     expansions.at(i)->totalCost = expansions.at(i)->gDistance;
                     statequeue.push(expansions.at(i));
                     foundSet.insert(expansions.at(i)->getCurrBoard());
-                    if(expansions.at(i)->solutionfound()){
-                        goalNode = expansions.at(i);
-                    } 
-
                 }
             }
         }
@@ -96,7 +91,6 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vecto
 //A* WITH MISPLACED TILE HEURISTIC
 problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    problem* goalNode = NULL;
     std::set<vector<int>> foundSet;
 
     std::cout << "Expanding state";
@@ -119,8 +113,8 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector
         }
         statequeue.pop();
 
-        if(goalNode != NULL && (goalNode->solutionfound() && (goalNode->totalCost <= statequeue.top()->totalCost))){
-            return goalNode;
+        if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
+            return initial_state;
         }
 
         repeats.insert(initial_state->getCurrBoard());
@@ -142,10 +136,6 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector
                     expansions.at(i)->totalCost = expansions.at(i)->heuristic + expansions.at(i)->gDistance;
                     statequeue.push(expansions.at(i));
                     foundSet.insert(expansions.at(i)->getCurrBoard());
-                    if(expansions.at(i)->solutionfound()){
-                        goalNode = expansions.at(i);
-                    } 
-
                 }
             }
         }
@@ -163,7 +153,6 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector
 //A* WITH EUCLIDEAN DISTANCE HEURISTIC   EUCLIDEAN == MANHATTAN
 problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    problem* goalNode = NULL;
     std::set<vector<int>> foundSet;
 
     std::cout << "Expanding state";
@@ -186,8 +175,8 @@ problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector
         }
         statequeue.pop();
 
-        if(goalNode != NULL && (goalNode->solutionfound() && (goalNode->totalCost <= statequeue.top()->totalCost))){
-            return goalNode;
+        if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
+            return initial_state;
         }
 
         repeats.insert(initial_state->getCurrBoard());
@@ -209,10 +198,6 @@ problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector
                     expansions.at(i)->totalCost = expansions.at(i)->heuristic + expansions.at(i)->gDistance;
                     statequeue.push(expansions.at(i));
                     foundSet.insert(expansions.at(i)->getCurrBoard());
-                    if(expansions.at(i)->solutionfound()){
-                        goalNode = expansions.at(i);
-                    } 
-
                 }
             }
         }
