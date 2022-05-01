@@ -201,7 +201,7 @@ struct MoveCost{
 
 ## Maximum Queue Size
 
-![Maximum Queue Size Graph](images\queuesize.png)
+![Maximum Queue Size Graph](/images/queuesize.png)
 
 
 |              | Uniform Cost Search | Misplaced Tile | Manhattan Distance |      
@@ -215,7 +215,7 @@ struct MoveCost{
 
 ## Nodes Expanded Per Puzzle
 
-![Nodes Expanded Per Puzzle](images\node.png)
+![Nodes Expanded Per Puzzle](/images/node.png)
 
 |              | Uniform Cost Search | Misplaced Tile | Manhattan Distance |      
 | ------------ | ------------------- | -------------- | ------------------ |
