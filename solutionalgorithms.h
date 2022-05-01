@@ -17,6 +17,7 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, std::
     root->print();
 
     statequeue.push(root);
+    repeats.clear();
 
     if(root->solutionfound()){
         return root;
@@ -68,6 +69,7 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, std::v
     root->print();
 
     statequeue.push(root);
+    repeats.clear();
 
     if(root->solutionfound()){
         return root;
@@ -121,6 +123,7 @@ problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, std::v
     root->print();
 
     statequeue.push(root);
+    repeats.clear();
 
     if(root->solutionfound()){
         return root;
