@@ -11,27 +11,37 @@ class problem{
         int num_columns;
         int boardSize;
     public:
+        // Constructors and Destructor
         problem();
         problem(std::vector<int> v, int rows, int columns);
         ~problem();
+
+        //Public Member Variables Accessed by Program
         problem* parent;
         double totalCost;           // f(n) = g(n) + h(n)
         double heuristic;           // h(n) = estimated distance from n to the goal
         double gDistance;           // g(n) = cost to get from node n from initial state
-        int findBlankIndex();
-        bool solutionfound();
         std::string direction;
+
+        // Move Functions, returns a Problem Pointer
         problem* moveUp();
         problem* moveDown();
         problem* moveLeft();
         problem* moveRight();
+
+        // Heuristic Calculation Functions
         int misplacedCost();
         int euclideanCost();
+
+        // Helper Functions
         void print();
-        void queuesort(std::vector<problem*> &statequeue);
         void determineDirection(int value);
         std::vector<int> getCurrBoard();
+        int findBlankIndex();
+        bool solutionfound();
 };
+
+// Structure for Priority Queue sorting
 
 struct MoveCost{
     bool operator()(problem* const b1, problem* const b2){
@@ -45,7 +55,5 @@ struct MoveCost{
         }
     }
 };
-
-bool searchRepeats(problem* currentTile, const std::vector<problem*> repeats);
 
 #endif

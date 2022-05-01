@@ -1,6 +1,5 @@
 #include "problem.h"
 #include "solutionalgorithms.h"
-using namespace std;
 
 int main(){
     problem* currnode;
@@ -11,9 +10,9 @@ int main(){
     int function_select = setup(solution, problemB);
     //tileBoard == initial state
     problem* tileBoard = new problem(problemB, number_rows, number_columns);
-    std::priority_queue<problem*, vector<problem*>, MoveCost> statequeue;
+    std::priority_queue<problem*, std::vector<problem*>, MoveCost> statequeue;
     std::vector<problem*> solutions;  
-    std::set<vector<int>> repeatedstates;
+    std::set<std::vector<int>> repeatedstates;
     //because A* doesn't stop after finding the first goal
     //so this will only be used for the A* searches
     statequeue.push(tileBoard);
@@ -56,34 +55,31 @@ int main(){
         }
 
         //now print out the steps to get from the start state to the solution state
-        cout << endl << endl << "SOLUTION PATH" << endl;
+        std::cout << "\n\nSOLUTION PATH\n";
         solutionpath.back()->print();
 
         
         for(int i=solutionpath.size()-2; i>=0; --i){
-            cout << endl << endl << "The best state to expand with g(n) = ";
-            cout << solutionpath.at(i)->gDistance << " and h(n) = ";
-            cout << solutionpath.at(i)->heuristic << " is..." << endl;
-            cout << "Move " << solutionpath.at(i)->direction << endl;
+            std::cout << "\n\nThe best state to expand with g(n) = ";
+            std::cout << solutionpath.at(i)->gDistance << " and h(n) = ";
+            std::cout << solutionpath.at(i)->heuristic << " is...\n";
+            std::cout << "Move " << solutionpath.at(i)->direction << std::endl;
             solutionpath.at(i)->print();
             if(i!=0){
-                cout << "    Expanding this node...";
+                std::cout << "    Expanding this node...";
             }
             else{
-                cout << endl << "    GOAL NODE REACHED" << endl << endl;
+                std::cout << "\n    GOAL NODE REACHED\n\n";
             }
         }
 
-        cout << "To solve this problem the search algorithm expanded a total of " << nodesexpanded << " nodes." << endl;
-        cout << "The maximum number of nodes in the queue at any one time: " << maxsize << "." << endl;
-        cout << "The depth of the goal node was " << solutionpath.front()->gDistance << "." << endl;;
+        std::cout << "To solve this problem the search algorithm expanded a total of " << nodesexpanded << " nodes.\n";
+        std::cout << "The maximum number of nodes in the queue at any one time: " << maxsize << ".\n";
+        std::cout << "The depth of the goal node was " << solutionpath.front()->gDistance << ".\n";
 
         //when i==0 it is at the solution statea2
     }
     else{
         std::cout << "No Solution Found! GG!\n";
     }
-    
-    std::cout << "Misplaced Tiles: " << tileBoard->misplacedCost() << std::endl;   
-    std::cout << "Manhattan Distance: " << tileBoard->euclideanCost() << std::endl;
 }

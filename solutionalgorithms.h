@@ -1,26 +1,6 @@
 #include "problem.h"
-using namespace std;
 
-/*void queuesort(std::vector<problem*> &statequeue){
-    for(int i = 0; i<statequeue.size(); ++i){
-        //reset the minindex & the minimum cost
-        int minindex = i;
-        int mincost = statequeue.at(i)->totalCost;
-        for(int k = i; k<statequeue.size(); ++k){
-            if(statequeue.at(k)->totalCost < mincost){
-                mincost = statequeue.at(k)->totalCost;
-                minindex = k;
-            }
-        }
-        //swap the index with the current lowest min with the current index we are ordering
-        problem* temp = statequeue.at(i);
-        statequeue.at(i) = statequeue.at(minindex);
-        statequeue.at(minindex) = temp;
-    }
-}
-*/
-
-bool checkSets(problem* move, std::set<vector<int>> explored, std::set<vector<int>> found){
+bool checkSets(problem* move, std::set<std::vector<int>> explored, std::set<std::vector<int>> found){
     bool b1 = !(explored.find(move->getCurrBoard()) != explored.end());
     bool b2 = !(found.find(move->getCurrBoard()) != found.end());
 
@@ -29,9 +9,9 @@ bool checkSets(problem* move, std::set<vector<int>> explored, std::set<vector<in
 
 //Here I will make the algorithm for each method
 //UNIFORM COST SEARCH
-problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
+problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, std::vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<std::vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    std::set<vector<int>> foundSet;
+    std::set<std::vector<int>> foundSet;
 
     std::cout << "Expanding state";
     root->print();
@@ -47,10 +27,6 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vecto
             maxsize = statequeue.size();
         }
         initial_state = statequeue.top();
-        if(initial_state->gDistance != 0){
-            //std::cout << "The best state to expand with g(n) = " << initial_state->gDistance << " and h(n) = " << initial_state->heuristic << "is ...\n";
-            //initial_state->print(); 
-        }
         statequeue.pop();
 
         if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
@@ -81,17 +57,12 @@ problem* UNIFORMCOST(problem* initial_state, std::priority_queue<problem*, vecto
     }
 
     return NULL;
-    //NEXT EXPANSION
-    /*cout << "The best state to expand with g(n) = " << statequeue.at(0)->gDistance << " and h(n) = " << statequeue.at(0)->heuristic << " is..." << endl;
-    statequeue.at(0)->print();
-    cout << "   Expanding this node..." << endl << endl;
-    */
 }
 
 //A* WITH MISPLACED TILE HEURISTIC
-problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
+problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, std::vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<std::vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    std::set<vector<int>> foundSet;
+    std::set<std::vector<int>> foundSet;
 
     std::cout << "Expanding state";
     root->print();
@@ -107,10 +78,6 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector
             maxsize = statequeue.size();
         }
         initial_state = statequeue.top();
-        if(initial_state->gDistance != 0){
-            //std::cout << "The best state to expand with g(n) = " << initial_state->gDistance << " and h(n) = " << initial_state->heuristic << "is ...\n";
-            //initial_state->print(); 
-        }
         statequeue.pop();
 
         if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
@@ -142,18 +109,13 @@ problem* AMISPLACED(problem* initial_state, std::priority_queue<problem*, vector
     }
 
     return NULL;
-    //NEXT EXPANSION
-    /*cout << "The best state to expand with g(n) = " << statequeue.at(0)->gDistance << " and h(n) = " << statequeue.at(0)->heuristic << " is..." << endl;
-    statequeue.at(0)->print();
-    cout << "   Expanding this node..." << endl << endl;
-    */
 }
 
 
 //A* WITH EUCLIDEAN DISTANCE HEURISTIC   EUCLIDEAN == MANHATTAN
-problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<vector<int>> &repeats, int &maxsize, int &expanded){
+problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, std::vector<problem*>, MoveCost> &statequeue, std::vector<problem*> &solutions, std::set<std::vector<int>> &repeats, int &maxsize, int &expanded){
     problem* root = initial_state;
-    std::set<vector<int>> foundSet;
+    std::set<std::vector<int>> foundSet;
 
     std::cout << "Expanding state";
     root->print();
@@ -169,10 +131,6 @@ problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector
             maxsize = statequeue.size();
         }
         initial_state = statequeue.top();
-        if(initial_state->gDistance != 0){
-            //std::cout << "The best state to expand with g(n) = " << initial_state->gDistance << " and h(n) = " << initial_state->heuristic << "is ...\n";
-            //initial_state->print(); 
-        }
         statequeue.pop();
 
         if(initial_state != NULL && (initial_state->solutionfound() && (initial_state->totalCost <= statequeue.top()->totalCost))){
@@ -204,9 +162,4 @@ problem* AEUCLIDEAN(problem* initial_state, std::priority_queue<problem*, vector
     }
 
     return NULL;
-    //NEXT EXPANSION
-    /*cout << "The best state to expand with g(n) = " << statequeue.at(0)->gDistance << " and h(n) = " << statequeue.at(0)->heuristic << " is..." << endl;
-    statequeue.at(0)->print();
-    cout << "   Expanding this node..." << endl << endl;
-    */
 }
