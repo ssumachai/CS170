@@ -7,15 +7,30 @@ int main(){
 
     setup(features, algorithm);
 
+    problem* myBoard = new problem(features, algorithm);
+    problem* solution = new problem();
+
     srand(time(NULL));
     
-    random_accuracy = getRandomEval();
-    std::cout << "Using no features and \"random\" evaluation, I get an accuracy of " << random_accuracy << "%\n";
-
+    switch(algorithm){
+        case 1:
+            random_accuracy = getRandomEval();
+            std::cout << "Using no features and \"random\" evaluation, I get an accuracy of " << random_accuracy << "%\n";
+            break;
+        case 2:
+            random_accuracy = getRandomEval();
+            std::cout << "Using all features() {";
+            for(int i = 1; i <= features; i++){
+                if(i == features){
+                    std::cout << i;
+                }
+                else{
+                    std::cout << i << ",";
+                }
+            }
+            std::cout << "}   and \"random\" evaluation, I got an accuracy of " << random_accuracy << "%\n";
+    }
     std::cout << "\nBeginning search.\n\n";
-
-    problem* myBoard = new problem(features);
-    problem* solution = new problem();
 
     switch(algorithm){
         case 1:

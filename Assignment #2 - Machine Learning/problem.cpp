@@ -6,14 +6,14 @@ problem::problem(){
     remaining_features = {};
     parent = NULL;
 }
-problem::problem(int start){
+problem::problem(int start, int choose){
     features = {};
     accuracy = 0.00;
-    fillFeatureBank(start);
+    fillFeatureBank(start, choose);
     parent = NULL;
 }
 
-problem* problem::generateChild(int index){
+problem* problem::generateForwardChild(int index){
     problem* temp = new problem();
     temp->features = getVector();
     temp->features.push_back(remaining_features.at(index));
@@ -24,6 +24,18 @@ problem* problem::generateChild(int index){
     temp_rem.erase(temp_rem.begin() + index);
 
     temp->remaining_features = temp_rem;
+    temp->parent = this;
+
+    return temp;
+}
+
+problem* problem::generateBackwardsChild(int index){
+    problem* temp = new problem();
+    std::vector<int> temp_rem = getVector();
+    temp_rem.erase(temp_rem.begin() + index);
+    temp->features = temp_rem;
+    temp->accuracy = getRandomEval();
+    temp->remaining_features = this->remaining_features;
     temp->parent = this;
 
     return temp;
@@ -79,9 +91,14 @@ void problem::printSolution(){
 
 }
 
-void problem::fillFeatureBank(int index){
+void problem::fillFeatureBank(int index, int select){
     for(unsigned i = 1; i <= index; i++){
-        remaining_features.push_back(i);
+        if(select == 1){
+            remaining_features.push_back(i);
+        }
+        else{
+            features.push_back(i);
+        }
     }
 }
 
@@ -91,6 +108,10 @@ double problem::getAccuracy(){
 
 problem* problem::getParent(){
     return this->parent;
+}
+
+int problem::frontierSize(){
+    return (int)features.size();
 }
 
 int problem::remainingSize(){

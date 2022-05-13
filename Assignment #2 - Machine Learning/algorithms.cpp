@@ -12,7 +12,7 @@ problem* ForwardSelection(problem* startBoard){
         return startBoard;
     }
     for(int i = 0; i < startBoard->remainingSize(); i++){
-        problem* temp = startBoard->generateChild(i);
+        problem* temp = startBoard->generateForwardChild(i);
         temp->print();
         children.push(temp);
     }
@@ -26,5 +26,22 @@ problem* ForwardSelection(problem* startBoard){
 }
 
 problem* BackwardElimination(problem* startBoard){
+    std::priority_queue<problem*, std::vector<problem*>, sortAccu> children;
 
+    if(startBoard->frontierSize() == 0){
+        return startBoard;
+    }
+    for(int i = 0; i < startBoard->frontierSize(); ++i){
+        problem* temp = startBoard->generateBackwardsChild(i);
+        temp->print();
+        children.push(temp);
+    }
+
+    std::cout << "\n\n";
+
+    if(children.top()->frontierSize() != 0){
+        children.top()->printBest();
+    }
+
+    return BackwardElimination(children.top());
 }

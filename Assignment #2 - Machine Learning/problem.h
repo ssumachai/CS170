@@ -12,11 +12,12 @@ class problem{
         double accuracy;
     public:
         problem();
-        problem(int start);
+        problem(int start, int choose);
         ~problem();
 
         //Generate Feature Children
-        problem* generateChild(int index);
+        problem* generateForwardChild(int index);
+        problem* generateBackwardsChild(int index);
 
         //Print Functions
         void print();
@@ -24,11 +25,12 @@ class problem{
         void printSolution();
 
         //Helper + Getter Functions
-        void fillFeatureBank(int index);
+        void fillFeatureBank(int index, int select);
         double getAccuracy();
         std::vector<int> getVector();
         problem* getParent();
         int remainingSize();
+        int frontierSize();
 };
 
 struct sortAccu{
