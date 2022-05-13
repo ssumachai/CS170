@@ -7,6 +7,7 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <queue>
 
 bool checkFeatureInput(int feature_count);
 bool checkAlgorithmInput(int algo_input);
