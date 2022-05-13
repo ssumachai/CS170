@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 
 bool checkFeatureInput(int feature_count);
 bool checkAlgorithmInput(int algo_input);

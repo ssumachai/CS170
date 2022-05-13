@@ -3,4 +3,6 @@
 
 #include "setup.h"
 
+double getRandomEval();
+
 #endif
