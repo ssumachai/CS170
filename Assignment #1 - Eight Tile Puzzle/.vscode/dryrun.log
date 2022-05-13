@@ -1,0 +1,6 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #1 - Eight Tile Puzzle'
+g++ -o turnin.exe main.cpp setup.cpp problem.cpp
+g++ -o test-cases.exe test-cases.cpp setup.cpp problem.cpp
+make: Leaving directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #1 - Eight Tile Puzzle'
+ 
