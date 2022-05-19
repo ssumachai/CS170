@@ -41,6 +41,21 @@ problem* problem::generateBackwardsChild(int index){
     return temp;
 }
 
+problem* problem::getBestSubset(){
+    problem* temp = new problem();
+    temp = this;
+    problem* max = new problem();
+    max = this;
+    while(temp != NULL){
+        if(temp->accuracy > max->accuracy){
+            max = temp;
+        }
+        temp = temp->parent;
+    }
+
+    return max;
+}
+
 void problem::print(){
     std::cout << "Using features() {";
 
@@ -75,19 +90,25 @@ void problem::printBest(){
     std::cout << "} was best, accuracy is " << accuracy << "%\n\n\n";    
 }
 
-void problem::printSolution(){
-    std::cout << "(Warning, Accuracy has decreased!)\nFinished Search!! The best feature subset is {";
-
-    for(int i = features.size() - 1; i >= 0; i--){
+void problem::printSolution(double initial_accuracy){
+    problem* printThis = getBestSubset();
+    
+    if(printThis->accuracy < initial_accuracy){
+        std::cout << "(Warning, Accuracy has decreased!)\n";
+    }
+    
+    std::cout << "Finished Search!! The best feature subset is {";
+    
+    for(int i = printThis->features.size() - 1; i >= 0; i--){
         if(i == 0){
-            std::cout << features[i];
+            std::cout << printThis->features[i];
         }
         else{
-            std::cout << features[i] << ",";
+            std::cout << printThis->features[i] << ",";
         }
     }
 
-    std::cout << "}, which has an accuracy of " << accuracy << "%\n";
+    std::cout << "}, which has an accuracy of " << printThis->accuracy << "%\n";
 
 }
 

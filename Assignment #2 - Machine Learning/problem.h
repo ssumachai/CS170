@@ -18,11 +18,12 @@ class problem{
         //Generate Feature Children
         problem* generateForwardChild(int index);
         problem* generateBackwardsChild(int index);
+        problem* getBestSubset();
 
         //Print Functions
         void print();
         void printBest();
-        void printSolution();
+        void printSolution(double initial_accuracy);
 
         //Helper + Getter Functions
         void fillFeatureBank(int index, int select);
