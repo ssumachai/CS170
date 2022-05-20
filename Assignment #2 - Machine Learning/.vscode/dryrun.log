@@ -1,0 +1,7 @@
+make.exe --dry-run --keep-going --print-directory
+make: Entering directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning'
+g++ -o test.exe main.cpp setup.cpp algorithms.cpp problem.cpp
+ 
+g++ -o data.exe data_test.cpp dataset.cpp
+make: Leaving directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning'
+ 
