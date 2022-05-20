@@ -14,6 +14,14 @@ void parse(std::vector<dataset*> &toParse, int dataindex){
             fileName = "baby_dataset.txt";
             dataSize = 3;
             break;
+        case 2:
+            fileName = "small_dataset.txt";
+            dataSize = 10;
+            break;
+        case 3:
+            fileName = "large_dataset.txt";
+            dataSize = 40;
+            break;
         default:
             break;
     }
@@ -39,7 +47,12 @@ void parse(std::vector<dataset*> &toParse, int dataindex){
 
 int main(){
     std::vector<dataset*> myData = {};
-    parse(myData, 1);
+    int setBuffer;
+    
+    std::cout << "Select a dataset to use:\n[1] - Baby Set (5 Instances, 3 Features\n[2] - Small Set (100 Instances, 10 Features)\n[3] - Large Set (1000 Instances, 40 Features)\n";
+    std::cin >> setBuffer;    
+
+    parse(myData, setBuffer);
 
     for(int i = 0; i < myData.size(); i++){
         myData[i]->print();
