@@ -5,6 +5,7 @@
 #include <fstream>
 #include <chrono>
 #include <vector>
+#include <queue>
 #include <algorithm>
 #include <string>
 #include <numeric>
@@ -12,7 +13,7 @@
 #include <math.h>
 #include <limits>
 #include <time.h>
-#include <queue>
+
 
 using namespace std::chrono;
 

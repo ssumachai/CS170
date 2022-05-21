@@ -8,8 +8,11 @@ class validator{
     private:
         classifier* myClass;
     public:
+        // Constructors + Destructors
         validator(classifier* c);
         ~validator();
+
+        // Calculate and return Leave-One-Out-Validation
         double accuracy(std::vector<int> featureSubset);
 };
 

@@ -4,27 +4,33 @@
 #include "setup.h"
 #include "dataset.h"
 
-using namespace std::chrono;
-
 class classifier{
     private:
         std::vector<dataset*> datasets;
     public:
+        // Constructors & Destructors
         classifier();
         ~classifier();
 
-        void parse();                   // Also known as train()
-        int test(int instance_index, std::vector<int> subsets);   // Test function
-        double getDefaultRate();
+        // Train and Test Functions
+        void parse();                                           // Also known as train()
+        int test(int instance_index, std::vector<int> subsets); // Test function
+        
+        // Normalize Data required for Calculating Distance
         void normalizeData();
-        void print();
-        int getDataSize();
-        int getClassLabel(int i);
+
+        // Distance Helper Function
         double getDistance(dataset* a, dataset* b, std::vector<int> features);
-        void subsetInput(std::vector<int> &f);
+
+        // Getter Helper Functions
+        double getDefaultRate();
+        int getDataSize();
         int getFeatureSize();
+        int getClassLabel(int i);
+
+        // Void Helper Functions 
+        void print();
+        void subsetInput(std::vector<int> &f);
 };
-
-
 
 #endif

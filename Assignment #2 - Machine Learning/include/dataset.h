@@ -9,14 +9,20 @@ class dataset{
         int featureCount;
         std::vector<float> features;
     public:
+        // Constructors + Destructors
         dataset();
         dataset(int type, std::vector<float> feats);
         ~dataset();
 
+        // Getter Helper Functions
         int getInstance();
         int getFeatureCount();
         float getFeatureValue(int index);
+
+        // Setter Helper Function
         void setFeatureValue(int index, float value);
+        
+        // Void Helper Functions
         void print();
 };
 

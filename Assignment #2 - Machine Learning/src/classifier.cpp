@@ -62,25 +62,23 @@ void classifier::parse(){
     std::cout << "Program took "  << duration.count() << " ms to parse the data\n";
 }
 
-double classifier::getDefaultRate(){
-    double instance_one = 0;
-    double instance_two = 0;
+int classifier::test(int instance_index, std::vector<int>subsets){
+    dataset* testInstance = datasets[instance_index];
+    dataset* currentNearest = new dataset();
 
-    for(unsigned i = 0; i < datasets.size(); i++){
-        if(datasets.at(i)->getInstance() == 1){
-            instance_one++;
+    double closest = std::numeric_limits<double>::max();
+    for(int i = 0; i < datasets.size(); i++){
+        if(i == instance_index){
+            continue;
         }
-        else{
-            instance_two++;
+        double eucl = getDistance(datasets[instance_index], datasets[i], subsets);
+        if(eucl < closest){
+            closest = eucl;
+            currentNearest = datasets[i];
         }
     }
 
-    if(instance_one > instance_two){
-        return instance_one / datasets.size();
-    }
-    else{
-        return instance_two / datasets.size();
-    }
+    return currentNearest->getInstance();
 }
 
 void classifier::normalizeData(){
@@ -119,40 +117,6 @@ void classifier::normalizeData(){
     std::cout << "Program took " << duration.count() << " ms to normalize the data\n";
 }
 
-void classifier::print(){
-    for(int i = 0; i < datasets.size(); i++){
-        datasets[i]->print();
-        std::cout << std::endl;
-    }
-}
-
-int classifier::test(int instance_index, std::vector<int>subsets){
-    dataset* testInstance = datasets[instance_index];
-    dataset* currentNearest = new dataset();
-
-    double closest = std::numeric_limits<double>::max();
-    for(int i = 0; i < datasets.size(); i++){
-        if(i == instance_index){
-            continue;
-        }
-        double eucl = getDistance(datasets[instance_index], datasets[i], subsets);
-        if(eucl < closest){
-            closest = eucl;
-            currentNearest = datasets[i];
-        }
-    }
-
-    return currentNearest->getInstance();
-}
-
-int classifier::getDataSize(){
-    return datasets.size();
-}
-
-int classifier::getClassLabel(int i){
-    return datasets[i]->getInstance();
-}
-
 double classifier::getDistance(dataset* a, dataset* b, std::vector<int> features){
     std::vector<double> under = {};
     // Compute Stuff Underneath the Square Root
@@ -174,8 +138,44 @@ double classifier::getDistance(dataset* a, dataset* b, std::vector<int> features
     return std::sqrt(under_sum);
 }
 
+double classifier::getDefaultRate(){
+    double instance_one = 0;
+    double instance_two = 0;
+
+    for(unsigned i = 0; i < datasets.size(); i++){
+        if(datasets.at(i)->getInstance() == 1){
+            instance_one++;
+        }
+        else{
+            instance_two++;
+        }
+    }
+
+    if(instance_one > instance_two){
+        return instance_one / datasets.size();
+    }
+    else{
+        return instance_two / datasets.size();
+    }
+}
+
+int classifier::getDataSize(){
+    return datasets.size();
+}
+
 int classifier::getFeatureSize(){
     return datasets[0]->getFeatureCount();
+}
+
+int classifier::getClassLabel(int i){
+    return datasets[i]->getInstance();
+}
+
+void classifier::print(){
+    for(int i = 0; i < datasets.size(); i++){
+        datasets[i]->print();
+        std::cout << std::endl;
+    }
 }
 
 void classifier::subsetInput(std::vector<int> &f){
