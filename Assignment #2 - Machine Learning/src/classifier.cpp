@@ -125,3 +125,70 @@ void classifier::print(){
         std::cout << std::endl;
     }
 }
+
+int classifier::test(int instance_index, std::vector<int>subsets){
+    dataset* testInstance = datasets[instance_index];
+    dataset* currentNearest = new dataset();
+
+    double closest = std::numeric_limits<double>::max();
+    for(int i = 0; i < datasets.size(); i++){
+        if(i == instance_index){
+            continue;
+        }
+        double eucl = getDistance(datasets[instance_index], datasets[i], subsets);
+        if(eucl < closest){
+            closest = eucl;
+            currentNearest = datasets[i];
+        }
+    }
+
+    return currentNearest->getInstance();
+}
+
+int classifier::getDataSize(){
+    return datasets.size();
+}
+
+int classifier::getClassLabel(int i){
+    return datasets[i]->getInstance();
+}
+
+double classifier::getDistance(dataset* a, dataset* b, std::vector<int> features){
+    std::vector<double> under = {};
+    // Compute Stuff Underneath the Square Root
+
+    for(int i = 0; i < features.size(); i++){
+        double temp = b->getFeatureValue(features[i]) - a->getFeatureValue(features[i]);
+        temp = pow(temp, 2);
+        under.push_back(temp);
+    }
+
+    // Compute Sum of stuff under the square root
+
+    double under_sum = 0;
+
+    for(int i = 0; i < under.size(); i++){
+        under_sum += under[i];
+    }
+
+    return std::sqrt(under_sum);
+}
+
+int classifier::getFeatureSize(){
+    return datasets[0]->getFeatureCount();
+}
+
+void classifier::subsetInput(std::vector<int> &f){
+    std::cout << "Enter the sub-sets you would like to use (1 - " << getFeatureSize() << "): ";
+    int buffer;
+
+    do{
+        std::cin >> buffer;
+        f.push_back(buffer);
+    }
+    while(std::cin.peek() == ' ');
+
+    for(int i = 0; i < f.size(); i++){
+        f[i] = f[i] - 1;
+    }
+}
