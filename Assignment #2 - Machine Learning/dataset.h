@@ -5,7 +5,7 @@
 
 class dataset{
     private:
-        int classifier;
+        int classLabel;
         int featureCount;
         std::vector<float> features;
     public:

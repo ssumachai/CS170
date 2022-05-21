@@ -1,19 +1,19 @@
 #include "dataset.h"
 
 dataset::dataset(){
-    classifier = 0;
+    classLabel = 0;
     featureCount = 0;
     features = {};
 }
 
 dataset::dataset(int type, std::vector<float> feats){
-    classifier = type;
+    classLabel = type;
     featureCount = feats.size();
     features = feats;
 }
 
 int dataset::getInstance(){
-    return classifier;
+    return classLabel;
 }
 
 int dataset::getFeatureCount(){
@@ -29,7 +29,7 @@ void dataset::setFeatureValue(int index, float value){
 }
 
 void dataset::print(){
-    std::cout << classifier << "\t";
+    std::cout << classLabel << "\t";
     for(int i = 0; i < featureCount; i++){
         std::cout << features[i] << "\t";
     }
