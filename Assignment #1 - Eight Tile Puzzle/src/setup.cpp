@@ -1,4 +1,4 @@
-#include "setup.h"
+#include "../include/setup.h"
 
 bool checkBoardInput(std::vector<int> gameBoard){    
     std::sort(gameBoard.begin(), gameBoard.end());

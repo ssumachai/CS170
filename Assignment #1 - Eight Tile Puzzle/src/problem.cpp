@@ -1,4 +1,4 @@
-#include "problem.h"
+#include "../include/problem.h"
 #include <stdlib.h>
 #include <math.h>
 

@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Thu May 12 19:49:06 2022
+# Make data base, printed on Sat May 21 13:35:02 2022
 
 # Variables
 
@@ -20,9 +19,11 @@ USERPROFILE = C:\Users\EndUser
 # environment
 LOCALAPPDATA = C:\Users\EndUser\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-0bbcf798-12cb-4466-a200-829ba599e382-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-eab78fd8-5cef-4a2c-934b-e4b479290d95-sock
+# makefile (from 'Makefile', line 3)
+SRC_DIR := src
 # environment
-VSCODE_CWD = C:\Users\EndUser\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS\Assignment #2 - Machine Learning
 # environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
@@ -30,13 +31,14 @@ SYSTEMROOT = C:\Windows
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+PSMODULEPATH = C:\Users\EndUser\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
 # default
 MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15120_YLVCNQDMLSTZTGJK
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crash 
+pad_7792_GAZWKHIMIEEGEMSG
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -50,7 +52,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\EndUser\AppData\Roaming\Code\CachedData\da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+VSCODE_CODE_CACHE_PATH = C:\Users\EndUser\AppData\Roaming\Code\CachedData\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LANG = C
 # default
@@ -90,7 +92,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 15120
+VSCODE_PID = 7792
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -148,7 +150,7 @@ COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
-PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
 # automatic
 +F = $(notdir $+)
 # environment
@@ -188,7 +190,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\EndUser\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\4a9904e03a94d9859b224621fe2f770f-1.67.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\4a9904e03a94d9859b224621fe2f770f-1.67.2-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -199,6 +201,10 @@ SUFFIXES :=
 ALLUSERSPROFILE = C:\ProgramData
 # environment
 SESSIONNAME = Console
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
@@ -208,7 +214,7 @@ CC = g++
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 # variable set hash-table stats:
-# Load=98/1024=10%, Rehash=0, Collisions=9/129=7%
+# Load=101/1024=10%, Rehash=0, Collisions=9/138=7%
 
 # Pattern-specific Variable Values
 
@@ -216,10 +222,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/EndUser/ 
-Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #1 - Eight Tile Puzzle, mtime 1652205977): 16 files, no impossibilities.
+# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #1 - Eight Tile Puzzle, mtime 1653165148): 9 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -227,7 +232,7 @@ Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #1 - Eight Tile Puz
 
 # Files
 
-turnin: main.cpp
+turnin: src/main.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -238,41 +243,42 @@ turnin: main.cpp
 # automatic
 # * := 
 # automatic
-# < := main.cpp
+# < := src/main.cpp
 # automatic
-# + := main.cpp
+# + := src/main.cpp
 # automatic
 # % := 
 # automatic
-# ^ := main.cpp
+# ^ := src/main.cpp
 # automatic
-# ? := main.cpp
+# ? := src/main.cpp
 # automatic
 # | := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/12=17%
-#  recipe to execute (from 'Makefile', line 10):
-	$(CC) -o turnin.exe main.cpp setup.cpp problem.cpp
+# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
+#  recipe to execute (from 'Makefile', line 12):
+	$(CC) -o $(SRC_DIR)/turnin.exe $(SRC_DIR)/main.cpp $(SRC_DIR)/setup.cpp $(SRC_DIR)/problem.cpp
 
 # Not a target:
 Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-21 13:34:54
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/main.cpp:
 #  Implicit rule search has been done.
 #  Last modified 2022-05-10 11:03:13
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-test-cases.cpp:
+test-cases: src/test-cases.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-test-cases: test-cases.cpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 7):
-	$(CC) -o test-cases.exe test-cases.cpp setup.cpp problem.cpp
+#  recipe to execute (from 'Makefile', line 9):
+	$(CC) -o test-cases.exe $(SRC_DIR)/test-cases.cpp $(SRC_DIR)/setup.cpp $(SRC_DIR)/problem.cpp
 
 # Not a target:
 .DEFAULT:
@@ -287,14 +293,13 @@ all: turnin test-cases
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 
 # Not a target:
-main.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 11:03:13
-#  File has been updated.
-#  Successfully updated.
+src/test-cases.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -310,12 +315,12 @@ main.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 21 / storage = 202 B / avg = 9 B
-# current buf: size = 8174 B / used = 202 B / count = 21 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 16 / storage = 135 B / avg = 8 B
+# current buf: size = 8174 B / used = 135 B / count = 16 / avg = 8 B
 
-# strcache performance: lookups = 34 / hit rate = 38%
+# strcache performance: lookups = 27 / hit rate = 40%
 # hash-table stats:
-# Load=21/8192=0%, Rehash=0, Collisions=0/34=0%
-# Finished Make data base on Thu May 12 19:49:06 2022
+# Load=16/8192=0%, Rehash=0, Collisions=0/27=0%
+# Finished Make data base on Sat May 21 13:35:02 2022
 
  

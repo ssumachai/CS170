@@ -1,5 +1,5 @@
-#include "problem.h"
-#include "solutionalgorithms.h"
+#include "../include/problem.h"
+#include "../include/solutionalgorithms.h"
 
 int main(){
     std::vector<int> test_case = {};
