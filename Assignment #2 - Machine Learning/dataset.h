@@ -13,7 +13,10 @@ class dataset{
         dataset(int type, std::vector<float> feats);
         ~dataset();
 
+        int getInstance();
+        int getFeatureCount();
         float getFeatureValue(int index);
+        void setFeatureValue(int index, float value);
         void print();
 };
 

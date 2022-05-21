@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <math.h>
 #include "dataset.h"
+#
 
 void parse(std::vector<dataset*> &toParse, int dataindex){
     std::string fileName;
@@ -25,6 +27,7 @@ void parse(std::vector<dataset*> &toParse, int dataindex){
         default:
             break;
     }
+    
 
     std::ifstream infile;
     infile.open(fileName);
@@ -44,6 +47,55 @@ void parse(std::vector<dataset*> &toParse, int dataindex){
     infile.close();
 }
 
+double getDefaultRate(const std::vector<dataset*> toParse){
+    double instance_one, instance_two, total = 0;
+
+    for(unsigned i = 0; i < toParse.size(); i++){
+        if(toParse.at(i)->getInstance() == 1){
+            instance_one++;
+        }
+        else{
+            instance_two++;
+        }
+        total++;
+    }
+
+    if(instance_one > instance_two){
+        return instance_one / total;
+    }
+    else{
+        return instance_two / total;
+    }
+}
+
+void normalizeData(std::vector<dataset*> &v){
+    double mean;
+    double total;
+    double sd;
+    
+    for(int i = 0; i < v[0]->getFeatureCount(); i++){
+        mean = total = sd = 0;
+        for(int j = 0; j < v.size(); j++){
+            total += v[j]->getFeatureValue(i);
+        }
+
+        mean = total / v.size();
+
+        for(int k = 0; k < v.size(); k++){
+            sd += pow(v[k]->getFeatureValue(i) - mean, 2);
+        }
+
+        sd = sd / (v.size() - 1);
+
+        sd = sqrt(sd);
+
+        for(int l = 0; l < v.size(); l++){
+            float temp = (v[l]->getFeatureValue(i) - mean) / sd;
+            v[l]->setFeatureValue(i, temp);
+        }
+    }
+}
+
 
 int main(){
     std::vector<dataset*> myData = {};
@@ -54,10 +106,23 @@ int main(){
 
     parse(myData, setBuffer);
 
+    std::cout << "Pre-Normalization Data\n";
+
     for(int i = 0; i < myData.size(); i++){
         myData[i]->print();
         std::cout << std::endl;
     }
+
+    normalizeData(myData);
+
+    std::cout << "Post-Normalization Data\n";
+
+    for(int i = 0; i < myData.size(); i++){
+        myData[i]->print();
+        std::cout << std::endl;
+    }
+
+    std::cout << "Using no features and \"Default Rate\" evaluation, I get an accuracy of " << getDefaultRate(myData) << "%\n";
 
     return 0;
 }

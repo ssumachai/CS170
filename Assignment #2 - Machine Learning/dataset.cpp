@@ -12,8 +12,20 @@ dataset::dataset(int type, std::vector<float> feats){
     features = feats;
 }
 
+int dataset::getInstance(){
+    return classifier;
+}
+
+int dataset::getFeatureCount(){
+    return featureCount;
+}
+
 float dataset::getFeatureValue(int index){
     return features[index];
+}
+
+void dataset::setFeatureValue(int index, float value){
+    features[index] = value;
 }
 
 void dataset::print(){
