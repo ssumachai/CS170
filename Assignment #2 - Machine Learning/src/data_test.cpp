@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <math.h>
-#include "classifier.h"
+#include "../include/classifier.h"
 
 int main(){
    

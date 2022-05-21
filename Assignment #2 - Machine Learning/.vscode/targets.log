@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sat May 21 12:15:40 2022
+# Make data base, printed on Sat May 21 13:12:55 2022
 
 # Variables
 
@@ -21,6 +20,8 @@ USERPROFILE = C:\Users\EndUser
 LOCALAPPDATA = C:\Users\EndUser\AppData\Local
 # environment
 VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-96b01c6f-1e0c-4b4d-8e1b-cbeda3506646-sock
+# makefile (from 'Makefile', line 3)
+SRC_DIR := src
 # environment
 VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS\Assignment #2 - Machine Learning
 # environment
@@ -36,10 +37,10 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7792_GAZWKHIMIEEGEMSG
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crash 
+pad_7792_GAZWKHIMIEEGEMSG
 # environment
-VSCODE_HANDL 
-ES_UNCAUGHT_ERRORS = true
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # automatic
@@ -213,7 +214,7 @@ CC = g++
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=9/131=7%
+# Load=101/1024=10%, Rehash=0, Collisions=9/138=7%
 
 # Pattern-specific Variable Values
 
@@ -221,9 +222,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653160480): 21 files, no impossibilities.
+# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653163970): 11 files, no impossibilities.
 
-# 21 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -234,16 +235,16 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-21 12:14:33
-#  Fi 
-le has been updated.
+#  Last modified 2022-05-21 13:12:45
+#  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-data_test.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-21 13:10:39
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -258,16 +259,15 @@ all: test data-test
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 
 # Not a target:
-main.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-20 15:33:17
-#  File has been updated.
-#  Successfully updated.
+src/data_test.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
-test: main.cpp
+test: src/main.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -278,28 +278,29 @@ test: main.cpp
 # automatic
 # * := 
 # automatic
-# < := main.cpp
+# < := src/main.cpp
 # automatic
-# + := main.cpp
+# + := src/main.cpp
 # automatic
 # % := 
 # automatic
-# ^ := main.cpp
+# ^ := src/main.cpp
 # automatic
-# ? := main.cpp
+# ? := src/main.cpp
 # automatic
 # | := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/12=17%
-#  recipe to execute (from 'Makefile', line 7):
-	$(CC) -o test.exe main.cpp setup.cpp algorithms.cpp problem.cpp
+# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
+#  recipe to execute (from 'Makefile', line 8):
+	$(CC) -o test.exe $(SRC_DIR)/main.cpp $(SRC_DIR)/setup.cpp $(SRC_DIR)/algorithms.cpp $(SRC_DIR)/problem.cpp
 
-data-test: data_test.cpp
+data-test: src/data_test.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 10):
-	$(CC) -o data.exe data_test.cpp dataset.cpp classifier.cpp
+#  File h 
+as not been updated.
+#  recipe to execute (from 'Makefile', line 11):
+	$(CC) -o data.exe $(SRC_DIR)/data_test.cpp $(SRC_DIR)/dataset.cpp $(SRC_DIR)/classifier.cpp
 
 # Not a target:
 .SUFFIXES:
@@ -315,12 +316,12 @@ data-test: data_test.cpp
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 249 B / avg = 9 B
-# current buf: size = 8174 B / used = 249 B / count = 26 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 18 / storage = 151 B / avg = 8 B
+# current buf: size = 8174 B / used = 151 B / count = 18 / avg = 8 B
 
-# strcache performance: lookups = 39 / hit rate = 33%
+# strcache performance: lookups = 29 / hit rate = 37%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=0/39=0%
-# Finished Make data base on Sat May 21 12:15:40 2022
+# Load=18/8192=0%, Rehash=0, Collisions=0/29=0%
+# Finished Make data base on Sat May 21 13:12:55 2022
 
  

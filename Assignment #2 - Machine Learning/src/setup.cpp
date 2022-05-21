@@ -1,4 +1,4 @@
-#include "setup.h"
+#include "../include/setup.h"
 
 void setup(int &feature_count, int &algo_select){
 

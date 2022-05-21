@@ -1,5 +1,5 @@
-#include "algorithms.h"
-#include "problem.h"
+#include "../include/algorithms.h"
+#include "../include/problem.h"
 
 int main(){
     int features, algorithm;

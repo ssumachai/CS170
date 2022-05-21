@@ -1,4 +1,4 @@
-#include "algorithms.h"
+#include "../include/algorithms.h"
 
 double getRandomEval(){
     double temp = rand() % 1000;
