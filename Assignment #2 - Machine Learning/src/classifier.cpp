@@ -9,7 +9,8 @@ classifier::classifier(){
 void classifier::parse(){
     int setBuffer;
     
-    std::cout << "Select a dataset to use:\n[1] - Baby Set (5 Instances, 3 Features\n[2] - Small Set (100 Instances, 10 Features)\n[3] - Large Set (1000 Instances, 40 Features)\nPlease enter your selection: ";
+    std::cout << "Select a dataset to use:\n[1] - Baby Set (5 Instances, 3 Features\n[2] - Small Set (100 Instances, 10 Features)\n[3] - Large Set (1000 Instances, 40 Features)\n";
+    std::cout << "[4] - Personal Small Dataset [155] (100 Instances, 10 Features)\n[5] - Personal Large Dataset [155] (1000 Instances, 40 Features)\nPlease enter your selection: ";
     std::cin >> setBuffer; 
     
     std::string fileName;
@@ -29,6 +30,14 @@ void classifier::parse(){
             break;
         case 3:
             fileName = "datasets/large_dataset.txt";
+            dataSize = 40;
+            break;
+        case 4:
+            fileName = "datasets/personal_small_dataset.txt";
+            dataSize = 10;
+            break;
+        case 5:
+            fileName = "datasets/personal_large_dataset.txt";
             dataSize = 40;
             break;
         default:

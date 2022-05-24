@@ -5,8 +5,9 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat May 21 15:01:59 2022
+# Make data base, printed on Tue May 24 14:07:56 2022
 
 # Variables
 
@@ -19,13 +20,12 @@ USERPROFILE = C:\Users\EndUser
 # environment
 LOCALAPPDATA = C:\Users\EndUser\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-4a6e3d5a-ee49-43b9-9d19-1e9230f76e10-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-417a8ca1-7943-480f-a9c8-2fa3ecaf9299-sock
 # makefile (from 'Makefile', line 3)
 SRC_DIR := src
 # environment
-VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS\Assignment #2 - Machine Learning
-# 
- environment
+VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS
+# environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
 SYSTEMROOT = C:\Windows
@@ -38,7 +38,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7792_GAZWKHIMIEEGEMSG
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6076_HLVGTONNFJAZNWXP
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -92,7 +92,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 7792
+VSCODE_PID = 6076
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -222,7 +222,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653170505): 11 files, no impossibilities.
+# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653172320): 11 files, no impossibilities.
 
 # 11 files, no impossibilities in 1 directories.
 
@@ -283,9 +283,9 @@ all: clean test data-test
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is se 
-t).
-# variable set hash-table stats:
+#  Needs to be updated (-q is set).
+# variable set hash-table sta 
+ts:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 # Not a target:
@@ -328,6 +328,6 @@ data-test: src/data_test.cpp
 # strcache performance: lookups = 32 / hit rate = 40%
 # hash-table stats:
 # Load=19/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Sat May 21 15:01:59 2022
+# Finished Make data base on Tue May 24 14:07:56 2022
 
  
