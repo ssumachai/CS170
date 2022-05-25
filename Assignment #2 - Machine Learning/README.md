@@ -8,6 +8,6 @@
 
 ## In completing this project, I consulted following resources:
 <ul>
-<li>[Normalization in Machine Learning](https://developers.google.com/machine-learning/data-prep/transform/normalization)
+<li>[Normalization in Machine Learning](https://developers.google.com/machine-learning/data-prep/transform/normalization/)
 
 
