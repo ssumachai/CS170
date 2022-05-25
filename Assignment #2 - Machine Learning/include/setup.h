@@ -22,6 +22,6 @@ class classifier;
 
 bool checkFeatureInput(int feature_count);
 bool checkAlgorithmInput(int algo_input);
-void setup(classifier* c, int &algo_select);
+void setup(classifier* c, int &algo_select, int &knn);
 
 #endif

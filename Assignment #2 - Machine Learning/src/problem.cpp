@@ -6,6 +6,7 @@ problem::problem(){
     remaining_features = {};
     parent = NULL;
     accuracy_decreased = false;
+    done = false;
 }
 
 problem::problem(classifier* c, validator* v, int algo_select){
@@ -15,7 +16,7 @@ problem::problem(classifier* c, validator* v, int algo_select){
     accuracy = c->getDefaultRate();
     fillFeatureBank(c->getFeatureSize(), algo_select);
     parent = NULL;
-    accuracy_decreased = false;
+    accuracy_decreased = done = false;
 }
 
 problem* problem::generateForwardChild(int index){
@@ -25,6 +26,7 @@ problem* problem::generateForwardChild(int index){
     temp->features = getVector();
     temp->features.push_back(remaining_features.at(index));
     temp->accuracy = tester->accuracy(temp->features);
+    temp->done = this->done;
     
     std::vector<int> temp_rem = this->remaining_features;
 
@@ -33,9 +35,11 @@ problem* problem::generateForwardChild(int index){
     temp->remaining_features = temp_rem;
     temp->parent = this;
 
-    if(parent != NULL){
-        if(parent->accuracy > temp->accuracy){
-            accuracy_decreased = true;
+    if(!done){
+        if(parent != NULL){
+            if(parent->accuracy > temp->accuracy){
+                temp->accuracy_decreased = true;
+            }
         }
     }
 
@@ -52,10 +56,13 @@ problem* problem::generateBackwardsChild(int index){
     temp->accuracy = tester->accuracy(temp->features);
     temp->remaining_features = this->remaining_features;
     temp->parent = this;
+    temp->done = this->done;
 
-    if(parent != NULL){
-        if(parent->accuracy > temp->accuracy){
-            accuracy_decreased = true;
+    if(!done){
+        if(parent != NULL){
+            if(parent->accuracy > temp->accuracy){
+                temp->accuracy_decreased = true;
+            }
         }
     }
 
@@ -89,7 +96,7 @@ void problem::print(){
         }
     }
 
-    std::cout << "} accuracy is " << accuracy << "%\n";
+    std::cout << "} accuracy is " << accuracy << "\n";
 }
 
 std::vector<int> problem::getVector(){
@@ -99,6 +106,7 @@ std::vector<int> problem::getVector(){
 void problem::printBest(){
     if(accuracy_decreased){
         std::cout << "(Warning, Accuracy has decreased!! Continuing search in case of local maxima)\n";
+        done = true;
     }
     
     std::cout << "Feature set {";
@@ -112,7 +120,7 @@ void problem::printBest(){
         }
     }
 
-    std::cout << "} was best, accuracy is " << accuracy * 100 << "%\n\n\n";    
+    std::cout << "} was best, accuracy is " << accuracy << "\n\n\n";    
 }
 
 void problem::printSolution(){
@@ -129,7 +137,7 @@ void problem::printSolution(){
         }
     }
 
-    std::cout << "}, which has an accuracy of " << printThis->accuracy << "%\n";
+    std::cout << "}, which has an accuracy of " << printThis->accuracy << "\n";
 
 }
 

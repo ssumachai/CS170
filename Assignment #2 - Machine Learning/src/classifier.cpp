@@ -76,9 +76,10 @@ void classifier::parse(){
     std::cout << "\nProgram took "  << duration.count() << " ms to parse the data\n\n";
 }
 
-int classifier::test(int instance_index, std::vector<int>subsets){
+int classifier::test(int instance_index, int k_nearest, std::vector<int>subsets){
     dataset* testInstance = datasets[instance_index];
     dataset* currentNearest = new dataset();
+    std::vector<NearestNode> nearest_neighbors = {};
 
     double closest = std::numeric_limits<double>::max();
     for(int i = 0; i < datasets.size(); i++){
@@ -86,13 +87,45 @@ int classifier::test(int instance_index, std::vector<int>subsets){
             continue;
         }
         double eucl = getDistance(datasets[instance_index], datasets[i], subsets);
-        if(eucl < closest){
-            closest = eucl;
-            currentNearest = datasets[i];
+        NearestNode temp = {i, eucl};
+        if(nearest_neighbors.size() < k_nearest){
+            nearest_neighbors.push_back(temp);
+        }
+        else{
+            nearest_neighbors.push_back(temp);
+            sort_cut(nearest_neighbors);
         }
     }
 
-    return currentNearest->getInstance();
+    int predicted_class = evaluateNeighbors(nearest_neighbors);
+
+    return predicted_class;
+}
+
+void classifier::sort_cut(std::vector<NearestNode> &d){
+    std::sort(d.begin(), d.end());
+
+    d.pop_back();
+}
+
+int classifier::evaluateNeighbors(std::vector<NearestNode> d){
+    int instance_1 = 0;
+    int instance_2 = 0;
+
+    for(int i = 0; i < d.size(); i++){
+        if(getClassLabel(d[i].index) == 1){
+            instance_1++;
+        }
+        else{
+            instance_2++;
+        }
+    }
+
+    if(instance_1 > instance_2){
+        return 1;
+    }
+
+    return 2;
 }
 
 void classifier::normalizeData(){

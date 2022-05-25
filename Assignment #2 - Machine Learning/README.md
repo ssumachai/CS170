@@ -420,25 +420,24 @@ Using features() {} accuracy is 0.13
 
 Based on this, we should use only feature 2 as it yields the highest accuracy of 0.9!
 
+# Analysis
+
+## Experiment 1 - Comparing Forward Selection vs Backwards Elimination
+
+## Experiment 2 - Not Normalizing the Data
+
+## Experiment 3 - Effect of Number Neighbors (k)
+
+# Conclusion
+
+
 # Dataset Traces
 
-All Traces to Data-Sets are provided here
+All Traces to Data-Sets are provided in the folders, however here is the trace for the small personal set:
 
-* Baby Set (5 Instances, 3 Features)
-    * <a href="trace_output/Forward Selection/baby_set_forward.txt">Forward</a>
-    * <a href="trace_output/Backward Elimination/baby_set_backwards.txt">Backwards</a>
-* Standard Small Set (100 Instances, 10 Features)
-    * <a href="trace_output/Forward Selection/small_set_forward.txt">Forward</a>
-    * <a href="trace_output/Backward Elimination/small_set_backwards.txt">Backwards</a>
-* Standard Large Set (1000 Instances, 40 Features)
-    * <a href="trace_output/Forward Selection/large_set_forward.txt">Forward</a>
-    * <a href="trace_output/Backward Elimination/large_set_backwards.txt">Backwards</a>
-* Personal Small Set (100 Instances, 10 Features)
-    * <a href="trace_output/Forward Selection/small_personal_forward.txt">Forward</a>
-    * <a href="trace_output/Backward Elimination/small_personal_backwards.txt">Backwards</a>
-* Personal Large Set (1000 Instances, 40 Features)
-    * <a href="trace_output/Forward Selection/large_personal_forward.txt">Forward</a>
-    * <a href="trace_output/Backward Elimination/large_personal_backwards.txt">Backwards</a>
+```
+Insert Code Here
+```
 
 
 

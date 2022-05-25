@@ -18,6 +18,7 @@ class problem{
         problem* parent;
         double accuracy;
         bool accuracy_decreased;
+        bool done;
     public:
         problem();
         problem(classifier* c, validator* v, int algo_select);

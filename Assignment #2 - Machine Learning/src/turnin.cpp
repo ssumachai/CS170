@@ -4,16 +4,17 @@
 
 int main(){
     int algorithm_to_use;
+    int neighbors_to_use;
     double default_rate = 0.00;
     std::string algo_name = "";
 
     classifier* myClass = new classifier();
 
-    setup(myClass, algorithm_to_use);
+    setup(myClass, algorithm_to_use, neighbors_to_use);
 
-    validator* myValidator = new validator(myClass);
+    validator* myValidator = new validator(myClass, neighbors_to_use);
 
-    std::cout << "This dataset has " << myClass->getFeatureSize() << " features (not including the class attribute, with ";
+    std::cout << "This dataset has " << myClass->getFeatureSize() << " features (not including the class attribute), with ";
     std::cout << myClass->getDataSize() << " instances.\n\nPlease wait while I normalize the data...";
 
     myClass->normalizeData();

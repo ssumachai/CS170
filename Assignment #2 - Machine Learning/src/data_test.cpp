@@ -9,7 +9,13 @@ int main(){
    
 
     classifier* myClass = new classifier();
-    validator* v = new validator(myClass);
+
+    std::cout << "Enter nearest neighbors to use: ";
+    int buffer;
+
+    std::cin >> buffer;
+
+    validator* v = new validator(myClass, buffer);
 
     myClass->parse();
 
