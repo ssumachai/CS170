@@ -40,7 +40,7 @@ int main(){
         case 2:
             algo_name = "Backwards Elimination";
             default_rate = myValidator->accuracy(myBoard->getVector());
-            std::cout << "Running nearest neighbor with all features (default rate), using \"leaving-one-out\" evaluatiom, I get a accuracy of ";
+            std::cout << "Running nearest neighbor with all features (default rate), using \"leaving-one-out\" evaluation, I get a accuracy of ";
             std::cout << default_rate << "%\n";
 
             std::cout << "\nBeginning Search.\n\n";
