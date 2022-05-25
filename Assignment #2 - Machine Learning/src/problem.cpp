@@ -5,6 +5,7 @@ problem::problem(){
     accuracy = 0.00;
     remaining_features = {};
     parent = NULL;
+    accuracy_decreased = false;
 }
 
 problem::problem(classifier* c, validator* v, int algo_select){
@@ -14,6 +15,7 @@ problem::problem(classifier* c, validator* v, int algo_select){
     accuracy = c->getDefaultRate();
     fillFeatureBank(c->getFeatureSize(), algo_select);
     parent = NULL;
+    accuracy_decreased = false;
 }
 
 problem* problem::generateForwardChild(int index){
@@ -31,6 +33,12 @@ problem* problem::generateForwardChild(int index){
     temp->remaining_features = temp_rem;
     temp->parent = this;
 
+    if(parent != NULL){
+        if(parent->accuracy > temp->accuracy){
+            accuracy_decreased = true;
+        }
+    }
+
     return temp;
 }
 
@@ -44,6 +52,12 @@ problem* problem::generateBackwardsChild(int index){
     temp->accuracy = tester->accuracy(temp->features);
     temp->remaining_features = this->remaining_features;
     temp->parent = this;
+
+    if(parent != NULL){
+        if(parent->accuracy > temp->accuracy){
+            accuracy_decreased = true;
+        }
+    }
 
     return temp;
 }
@@ -83,6 +97,10 @@ std::vector<int> problem::getVector(){
 }
 
 void problem::printBest(){
+    if(accuracy_decreased){
+        std::cout << "(Warning, Accuracy has decreased!! Continuing search in case of local maxima)\n";
+    }
+    
     std::cout << "Feature set {";
     
     for(int i = features.size() - 1; i >= 0; i--){
@@ -97,12 +115,8 @@ void problem::printBest(){
     std::cout << "} was best, accuracy is " << accuracy << "%\n\n\n";    
 }
 
-void problem::printSolution(double initial_accuracy){
+void problem::printSolution(){
     problem* printThis = getBestSubset();
-    
-    if(printThis->accuracy < initial_accuracy){
-        std::cout << "(Warning, Accuracy has decreased!)\n";
-    }
     
     std::cout << "Finished Search!! The best feature subset is {";
     

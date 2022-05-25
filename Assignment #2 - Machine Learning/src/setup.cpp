@@ -10,18 +10,18 @@ void setup(classifier* c, int &algo_select){
     
     c->parse();
 
-    std::cout << "Type the number of the algorithm you want to run.\n";
+    std::cout << "Type the number of the algorithm you want to run.\n\n";
     std::cout << "[1] - Forward Selection\n[2] - Backward Elimination\n";
     std::cin >> buffer;
 
     while(!algo_selected){
         switch(buffer){
             case 1:
-                std::cout << "Use Forward Selection Algorithm\n";
+                std::cout << "\nUse Forward Selection Algorithm\n\n";
                 algo_selected = true;
                 break;
             case 2:
-                std::cout << "Use Backward Elimination Algorithm\n";
+                std::cout << "\nUse Backward Elimination Algorithm\n\n";
                 algo_selected = true;
                 break;
             default:

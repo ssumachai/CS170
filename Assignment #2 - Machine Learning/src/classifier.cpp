@@ -9,8 +9,8 @@ classifier::classifier(){
 void classifier::parse(){
     int setBuffer;
     
-    std::cout << "Select a dataset to use:\n[1] - Baby Set (5 Instances, 3 Features\n[2] - Small Set (100 Instances, 10 Features)\n[3] - Large Set (1000 Instances, 40 Features)\n";
-    std::cout << "[4] - Personal Small Dataset [155] (100 Instances, 10 Features)\n[5] - Personal Large Dataset [155] (1000 Instances, 40 Features)\nPlease enter your selection: ";
+    std::cout << "\nSelect a dataset to use:\n\n[1] - Baby Set (5 Instances, 3 Features)\n[2] - Small Set (100 Instances, 10 Features)\n[3] - Large Set (1000 Instances, 40 Features)\n";
+    std::cout << "[4] - Personal Small Dataset [155] (100 Instances, 10 Features)\n[5] - Personal Large Dataset [155] (1000 Instances, 40 Features)\n\nPlease enter your selection: ";
     std::cin >> setBuffer; 
     
     std::string fileName;
@@ -22,22 +22,27 @@ void classifier::parse(){
     switch(setBuffer){
         case 1:
             fileName = "datasets/baby_dataset.txt";
+            std::cout << "Using Baby Data Set.\n";
             dataSize = 3;
             break;
         case 2:
             fileName = "datasets/small_dataset.txt";
+            std::cout << "Using Small Generic Data Set.\n";
             dataSize = 10;
             break;
         case 3:
             fileName = "datasets/large_dataset.txt";
+            std::cout << "Using Large Generic Data Set.\n";
             dataSize = 40;
             break;
         case 4:
             fileName = "datasets/personal_small_dataset.txt";
+            std::cout << "Using Small Peronal Data Set [155].\n";
             dataSize = 10;
             break;
         case 5:
             fileName = "datasets/personal_large_dataset.txt";
+            std::cout << "Using Large Personal Data Set. [155]\n";
             dataSize = 40;
             break;
         default:
@@ -68,7 +73,7 @@ void classifier::parse(){
 
     auto duration = duration_cast<microseconds>(stop-start);
 
-    std::cout << "Program took "  << duration.count() << " ms to parse the data\n";
+    std::cout << "\nProgram took "  << duration.count() << " ms to parse the data\n\n";
 }
 
 int classifier::test(int instance_index, std::vector<int>subsets){
@@ -123,7 +128,7 @@ void classifier::normalizeData(){
 
     auto duration = duration_cast<microseconds>(stop - start);
 
-    std::cout << "Program took " << duration.count() << " ms to normalize the data\n";
+    std::cout << "\tDone! (Program took " << duration.count() << " ms to normalize the data).\n\n";
 }
 
 double classifier::getDistance(dataset* a, dataset* b, std::vector<int> features){

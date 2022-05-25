@@ -17,6 +17,7 @@ class problem{
         std::vector<int> remaining_features;
         problem* parent;
         double accuracy;
+        bool accuracy_decreased;
     public:
         problem();
         problem(classifier* c, validator* v, int algo_select);
@@ -32,7 +33,7 @@ class problem{
         //Print Functions
         void print();
         void printBest();
-        void printSolution(double initial_accuracy);
+        void printSolution();
 
         //Helper + Getter Functions
         void fillFeatureBank(int index, int select);
