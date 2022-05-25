@@ -112,7 +112,7 @@ void problem::printBest(){
         }
     }
 
-    std::cout << "} was best, accuracy is " << accuracy << "%\n\n\n";    
+    std::cout << "} was best, accuracy is " << accuracy * 100 << "%\n\n\n";    
 }
 
 void problem::printSolution(){
