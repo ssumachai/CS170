@@ -13,12 +13,15 @@
 #include <math.h>
 #include <limits>
 #include <time.h>
+#include "classifier.h"
 
 
 using namespace std::chrono;
 
+class classifier;
+
 bool checkFeatureInput(int feature_count);
 bool checkAlgorithmInput(int algo_input);
-void setup(int &feature_count, int &algo_select);
+void setup(classifier* c, int &algo_select);
 
 #endif

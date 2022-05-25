@@ -4,6 +4,8 @@
 #include "setup.h"
 #include "dataset.h"
 
+class dataset;
+
 class classifier{
     private:
         std::vector<dataset*> datasets;

@@ -4,6 +4,8 @@
 #include "setup.h"
 #include "classifier.h"
 
+class classifier;
+
 class validator{
     private:
         classifier* myClass;

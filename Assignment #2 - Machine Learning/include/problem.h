@@ -3,22 +3,31 @@
 
 #include "setup.h"
 #include "algorithms.h"
+#include "classifier.h"
+#include "validator.h"
+
+class classifier;
+class validator;
 
 class problem{
     private:
+        classifier* problem_set;
+        validator* tester;
         std::vector<int> features;
         std::vector<int> remaining_features;
         problem* parent;
         double accuracy;
     public:
         problem();
-        problem(int start, int choose);
+        problem(classifier* c, validator* v, int algo_select);
         ~problem();
 
         //Generate Feature Children
         problem* generateForwardChild(int index);
         problem* generateBackwardsChild(int index);
         problem* getBestSubset();
+
+        bool checkDuplicates();
 
         //Print Functions
         void print();

@@ -1,16 +1,14 @@
 #include "../include/setup.h"
 
-void setup(int &feature_count, int &algo_select){
+void setup(classifier* c, int &algo_select){
 
     int buffer;
     bool algo_selected = false;
     std::string temp_message;
 
     std::cout << "Welcome to Chai's Feature Selection Algorithm.\n";
-    std::cout << "Please enter the total number of features: ";
-    std::cin >> buffer;
-
-    feature_count = buffer;
+    
+    c->parse();
 
     std::cout << "Type the number of the algorithm you want to run.\n";
     std::cout << "[1] - Forward Selection\n[2] - Backward Elimination\n";

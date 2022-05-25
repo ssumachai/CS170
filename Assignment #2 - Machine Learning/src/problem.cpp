@@ -6,18 +6,23 @@ problem::problem(){
     remaining_features = {};
     parent = NULL;
 }
-problem::problem(int start, int choose){
+
+problem::problem(classifier* c, validator* v, int algo_select){
+    problem_set = c;
+    tester = v;
     features = {};
-    accuracy = 0.00;
-    fillFeatureBank(start, choose);
+    accuracy = c->getDefaultRate();
+    fillFeatureBank(c->getFeatureSize(), algo_select);
     parent = NULL;
 }
 
 problem* problem::generateForwardChild(int index){
     problem* temp = new problem();
+    temp->problem_set = this->problem_set;
+    temp->tester = this->tester;
     temp->features = getVector();
     temp->features.push_back(remaining_features.at(index));
-    temp->accuracy = getRandomEval();
+    temp->accuracy = tester->accuracy(temp->features);
     
     std::vector<int> temp_rem = this->remaining_features;
 
@@ -31,10 +36,12 @@ problem* problem::generateForwardChild(int index){
 
 problem* problem::generateBackwardsChild(int index){
     problem* temp = new problem();
+    temp->problem_set = this->problem_set;
+    temp->tester = this->tester;
     std::vector<int> temp_rem = getVector();
     temp_rem.erase(temp_rem.begin() + index);
     temp->features = temp_rem;
-    temp->accuracy = getRandomEval();
+    temp->accuracy = tester->accuracy(temp->features);
     temp->remaining_features = this->remaining_features;
     temp->parent = this;
 
@@ -61,10 +68,10 @@ void problem::print(){
 
     for(int i = features.size() - 1; i >= 0; i--){
         if(i == 0){
-            std::cout << features[i];
+            std::cout << features[i] + 1;
         }
         else{
-            std::cout << features[i] << ",";
+            std::cout << features[i] + 1 << ",";
         }
     }
 
@@ -80,10 +87,10 @@ void problem::printBest(){
     
     for(int i = features.size() - 1; i >= 0; i--){
         if(i == 0){
-            std::cout << features[i];
+            std::cout << features[i] + 1;
         }
         else{
-            std::cout << features[i] << ",";
+            std::cout << features[i] + 1 << ",";
         }
     }
 
@@ -101,10 +108,10 @@ void problem::printSolution(double initial_accuracy){
     
     for(int i = printThis->features.size() - 1; i >= 0; i--){
         if(i == 0){
-            std::cout << printThis->features[i];
+            std::cout << printThis->features[i] + 1;
         }
         else{
-            std::cout << printThis->features[i] << ",";
+            std::cout << printThis->features[i] + 1 << ",";
         }
     }
 
@@ -113,7 +120,7 @@ void problem::printSolution(double initial_accuracy){
 }
 
 void problem::fillFeatureBank(int index, int select){
-    for(unsigned i = 1; i <= index; i++){
+    for(unsigned i = 0; i < index; i++){
         if(select == 1){
             remaining_features.push_back(i);
         }
