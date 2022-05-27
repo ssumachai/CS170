@@ -436,7 +436,150 @@ Based on this, we should use only feature 2 as it yields the highest accuracy of
 All Traces to Data-Sets are provided in the folders, however here is the trace for the small personal set:
 
 ```
-Insert Code Here
+Welcome to Chai's Feature Selection Algorithm.
+
+Select a dataset to use:
+
+[1] - Baby Set (5 Instances, 3 Features)
+[2] - Small Set (100 Instances, 10 Features)
+[3] - Large Set (1000 Instances, 40 Features)
+[4] - Personal Small Dataset [155] (100 Instances, 10 Features)
+[5] - Personal Large Dataset [155] (1000 Instances, 40 Features)
+
+Please enter your selection: Using Small Generic Data Set.
+
+Program took 3792 ms to parse the data
+
+Type the number of the algorithm you want to run.
+
+[1] - Forward Selection
+[2] - Backward Elimination
+
+Use Forward Selection Algorithm
+
+Type the number of the Nearest Neighbors you want to run. (Default is 1)
+
+[1] - Default
+[3]
+[5]
+
+Using 1 Nearest Neighbor Evaluation
+
+This dataset has 10 features (not including the class attribute), with 100 instances.
+
+Please wait while I normalize the data...	Done! (Program took 62 ms to normalize the data).
+
+Running nearest neighbor with no features (default rate), using "leaving-one-out" evaluation, I get an accuracy of 0.75%
+
+Beginning Search.
+
+Using features() {1} accuracy is 0.57
+Using features() {2} accuracy is 0.54
+Using features() {3} accuracy is 0.68
+Using features() {4} accuracy is 0.65
+Using features() {5} accuracy is 0.75
+Using features() {6} accuracy is 0.61
+Using features() {7} accuracy is 0.62
+Using features() {8} accuracy is 0.6
+Using features() {9} accuracy is 0.66
+Using features() {10} accuracy is 0.64
+
+
+Feature set {5} was best, accuracy is 0.75
+
+
+Using features() {1,5} accuracy is 0.76
+Using features() {2,5} accuracy is 0.8
+Using features() {3,5} accuracy is 0.92
+Using features() {4,5} accuracy is 0.75
+Using features() {6,5} accuracy is 0.79
+Using features() {7,5} accuracy is 0.8
+Using features() {8,5} accuracy is 0.77
+Using features() {9,5} accuracy is 0.73
+Using features() {10,5} accuracy is 0.82
+
+
+Feature set {3,5} was best, accuracy is 0.92
+
+
+Using features() {1,3,5} accuracy is 0.83
+Using features() {2,3,5} accuracy is 0.79
+Using features() {4,3,5} accuracy is 0.84
+Using features() {6,3,5} accuracy is 0.82
+Using features() {7,3,5} accuracy is 0.89
+Using features() {8,3,5} accuracy is 0.79
+Using features() {9,3,5} accuracy is 0.82
+Using features() {10,3,5} accuracy is 0.85
+
+
+Feature set {7,3,5} was best, accuracy is 0.89
+
+
+Using features() {1,7,3,5} accuracy is 0.88
+Using features() {2,7,3,5} accuracy is 0.81
+Using features() {4,7,3,5} accuracy is 0.78
+Using features() {6,7,3,5} accuracy is 0.88
+Using features() {8,7,3,5} accuracy is 0.8
+Using features() {9,7,3,5} accuracy is 0.82
+Using features() {10,7,3,5} accuracy is 0.84
+
+
+(Warning, Accuracy has decreased!! Continuing search in case of local maxima)
+Feature set {1,7,3,5} was best, accuracy is 0.88
+
+
+Using features() {2,1,7,3,5} accuracy is 0.79
+Using features() {4,1,7,3,5} accuracy is 0.77
+Using features() {6,1,7,3,5} accuracy is 0.86
+Using features() {8,1,7,3,5} accuracy is 0.75
+Using features() {9,1,7,3,5} accuracy is 0.75
+Using features() {10,1,7,3,5} accuracy is 0.75
+
+
+Feature set {6,1,7,3,5} was best, accuracy is 0.86
+
+
+Using features() {2,6,1,7,3,5} accuracy is 0.76
+Using features() {4,6,1,7,3,5} accuracy is 0.73
+Using features() {8,6,1,7,3,5} accuracy is 0.78
+Using features() {9,6,1,7,3,5} accuracy is 0.71
+Using features() {10,6,1,7,3,5} accuracy is 0.71
+
+
+Feature set {8,6,1,7,3,5} was best, accuracy is 0.78
+
+
+Using features() {2,8,6,1,7,3,5} accuracy is 0.68
+Using features() {4,8,6,1,7,3,5} accuracy is 0.68
+Using features() {9,8,6,1,7,3,5} accuracy is 0.72
+Using features() {10,8,6,1,7,3,5} accuracy is 0.67
+
+
+Feature set {9,8,6,1,7,3,5} was best, accuracy is 0.72
+
+
+Using features() {2,9,8,6,1,7,3,5} accuracy is 0.7
+Using features() {4,9,8,6,1,7,3,5} accuracy is 0.64
+Using features() {10,9,8,6,1,7,3,5} accuracy is 0.67
+
+
+Feature set {2,9,8,6,1,7,3,5} was best, accuracy is 0.7
+
+
+Using features() {4,2,9,8,6,1,7,3,5} accuracy is 0.7
+Using features() {10,2,9,8,6,1,7,3,5} accuracy is 0.68
+
+
+Feature set {4,2,9,8,6,1,7,3,5} was best, accuracy is 0.7
+
+
+Using features() {10,4,2,9,8,6,1,7,3,5} accuracy is 0.65
+
+
+Forward Selection Search Completed, Total Time Elapsed: 689632 ms.
+
+Finished Search!! The best feature subset is {3,5}, which has an accuracy of 0.92
+
 ```
 
 

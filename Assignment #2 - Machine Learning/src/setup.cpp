@@ -51,6 +51,7 @@ void setup(classifier* c, int &algo_select, int &knn){
             case 5:
                 std::cout << "\nUsing 5 Nearest Neighbors Evaluation\n\n";
                 neighbor_selected = true;
+                break;
             default:
                 std::cout << "Invalid Input, please try again: ";
                 std::cin >> buffer;
