@@ -19,7 +19,11 @@ int main(){
 
     myClass->parse();
 
+    myClass->print();
+
     myClass->normalizeData();
+
+    myClass->print();
 
     double default_rate = myClass->getDefaultRate();
 

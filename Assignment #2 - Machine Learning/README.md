@@ -21,18 +21,12 @@ Creating a system of such scale may present several issues that require the stud
 <ol>
 <li> A Dummy Driver, that uses Random Evaluation and Greedy Selection
 <li> Implementing Accuracy Evaluation
-<li> Combining the two, into one file
+<li> Combining the two, into one executable
 </ol>
 
 My design process, as well as how the functions were structured and created will be explained in detail in the later sections
 
 To run the code, please run `make` in your terminal.  You will then see that two executable files are created, `data.exe` and `turnin.exe`.  `data.exe` may be used as one-time data tester to verify specific feature subsets and what they evaluate to.  `turnin.exe` is meant to be the fully functional executable.
-
-# Challenges
-
-The main challenge with this program was more conceptual on how to visualize the data.  For example, plotting one feature on a graph is simply a one-dimensional graph, two features is two-dimensional, and three-features is three-dimensional.  It starts to get really confusing to mentally picture it, once we start comparing and plotting multiple features!
-
-Thankfully, most graphs can be solved via math, which our computers absolutely excel at.  Once I was able to generalize my code, I was able to create something that is completely functional, no matter what you throw at it.
 
 # Code Design
 
@@ -40,13 +34,13 @@ As I mentioned above, the program was split into three phases, and during the fi
 
 ## Phase 1 - Implementing the Search Algorithms
 
-In this part of the project, we needed to implement two search methods: Forward Selection and Backwards Elimination.  Our algoritm would be greedy in nature, and select (at the moment), whichever child has the highest accuracy.  
+In this part of the project, we needed to implement two search methods: Forward Selection and Backwards Elimination.  Our algorithm would be greedy in nature, and select (at the moment), whichever child has the highest accuracy.  
 
-The immediate issue at the moment is, how do we test that the algorithm works, if we don't have a way of testing the data and determining itss true accuracy? Well, we just use random numbers for now.
+The immediate issue at the moment is, how do we test that the algorithm works, if we don't have a way of testing the data and determining its true accuracy? Well, we just use random numbers for now.
 
 ### Setup
 
-In order to get this project flowing, we needed to first setup the program to accept our user input, and set up the program with all the information it needs to run properly.  During this time, we setup an arbitrary board with a number of features. We then prompt the user to indicate whether they want to use Forward Selection or Backwards Elimination
+In order to get this project flowing, we needed to first set up the program to accept our user input, and set up the program with all the information it needs to run properly.  During this time, we set up an arbitrary board with a number of features. We then prompt the user to indicate whether they want to use Forward Selection or Backwards Elimination
 
 ### `class problem`
 
@@ -360,7 +354,7 @@ Using features() {1, 4, 3, 2} accuracy is 0.512
 
 At this point, that becomes our solution state, as it's the final state where all features have been explored.  From there, we find the state that has the highest accuracy!  We do this, by constantly checking the states parents nodes, and the node with the highest accuracy is the best subset!
 
-In the above example, there are the states we explored, and their accuracys:
+In the above example, there are the states we explored, and their accuracies:
 
 ```
 Using features() {} accuracy is 0.31
@@ -453,12 +447,161 @@ Using features() {1} accuracy is 0.732
 Using features() {40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2} accuracy is 0.718
 ```
 
+For testing purposes, I added something to the trace to see how many computations were done via each feature appraisal, below are the code traces:
+
+```
+Using no features and "Default Rate" evaluation, I get an accuracy of 0.834%
+Enter whether you want to test custom subset, or all [1/2]: 1
+Enter the sub-sets you would like to use (1 - 40): 1
+I made 1000 comparisons when testing this data
+If you only use feature(s) {1}, accuracy should be about 0.732
+
+Using no features and "Default Rate" evaluation, I get an accuracy of 0.834%
+Enter whether you want to test custom subset, or all [1/2]: 2
+I made 40000 comparisons when testing this data
+If you only use feature(s) {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40}, accuracy should be about 0.696
+```
+
+Note how when using all features, as Backwards Elimination does, it did nearly 40000 computations just for one test.  Now repeat that 40 times, then 39 times, then 38 times, and you begin to see the difference in time complexity.
+
+### Comparing Accuracy
+
+When doing the default rate, Forward Selection and Backwards Elimination have two different meanings.
+
+For Forward Selection, the default rate means evaluate the subset with no features, while Backwards Elimination means evaluate it with ALL features.
+
+Below are the findings:
+
+![DefaultStats](images/default_rate.png)
+
+### Comparing Feature Set and Accuracy
+
+As noted above, both algorithms result in finding different best feature subsets, with different corresponding accuracies, that information is listed below:
+
+![BestSubsets](images/best_subsets_experiment1.png)
+
+Note how oftentimes Forward Selection yields the highest accuracies.  This is probably due to the fact that being able to check to see which one is the highest and then adding is much more advantageous than starting with everything one by one.
+
+By analyzing everything all at once via Backwards Elimination, we have no choice but to consider all information, even if that information or features may be useless.
+
+Forward selection ensures that at each iteration, we select the most "useful" feature, which contributes to accuracy.
+
+Backwards Elimination removes the most "useless" feature, but in doing so, doesn't make our statistics any better!
+
 ## Experiment 2 - Not Normalizing the Data
+
+The datasets we received only have two classes, but they have continuous features that must be normalized!  This improves the accuracy and integrity of your data while ensuring that your database is easier to navigate. Put simply, data normalization ensures that your data looks, reads, and can be utilized the same way across all of the records in your customer database.
+
+But what happens if we don't normalize the data?  Let us obtain the best feature subsets with no normalization and see what those results look like:
+
+![NoNormal](images/no_normal.png)
+
+> Note: This image is exactly the same? But we know that the data has not been normalized, because here a trace of the values before, and after normalization, along with their values.  For simplicity, we will be conducting our functions on the baby set, containing 5 Instances and 3 features
+
+```
+Using Baby Data Set.
+
+Program took 166 ms to parse the data
+
+Data Pre-Normalization
+1       0.01    0.02    0.02
+2       0.01    0.01    0.03
+1       0.02    0.03    0.02
+1       0.03    0.02    0.02
+2       0.05    0.01    0.05
+        Done! (Program took 1 ms to normalize the data).
+
+Data Post-Normalization
+1       -0.83666        0.239046        -0.613572
+2       -0.83666        -0.956183       0.153393
+1       -0.239046       1.43427         -0.613572
+1       0.358569        0.239046        -0.613572
+2       1.5538          -0.956183       1.68732
+Using no features and "Default Rate" evaluation, I get an accuracy of 0.6%
+```
+
+Despite doing this, nothing really changes, and normalizing the data is simply used to make the data easily scalable and readable, although there are some instances where not normalizing the data may result in a change of accuracy.  For example, running a test on all feature subsets of the baby set with normalization yields an accuracy of 60%, while without yields 40%
+
+```
+// With Normalization
+Using features() {1,3,2} accuracy is 0.8
+
+// Without Normalization
+Using features() {1,3,2} accuracy is 0.4
+```
+
 
 ## Experiment 3 - Effect of Number Neighbors (k)
 
+During this assignment, we effectively ran K-Nearest Neighbors, with K being defaulted to 1 for the entirety of the simulations.  However, we know that the lower the k-value is, the more it can potentially be subjected to outliers!
+
+On the random off-chance that a tested instances' nearest neighbor is an outlier of another class, it can be incorrectly predicted as that potential outlier.
+
+In order to combat this, we increase the amount of Nearest Neighbors we check!  Previously, the function used to check to see if an instance was the current nearest neighbor was simply evaluating it's distance, and if it's lower than the current Minimum Distance, then that particular instance becomes our current Nearest Neighbor.
+
+However, that implementation only works if we are using one nearest neighbor!  In order to correctly evaluate multiple nearest neighbors, we should have some sort of data structure that contains information about that instances index and distance, thus we created
+
+### `struct NearestNode`
+
+By creating this structure, then creating a vector of it, we can effectively store all relevant information regarding Node Information and distance.  We then further overload the comparison operator so we can effectively use `std::sort()` in order to sort the vector via distance:
+
+```c++
+    bool operator<(const NearestNode &r) const {
+        return distance < r.distance;
+    }
+```
+
+### Implementation
+
+Also, we must update `classifier::test()` to also receive the amount of nearest neighbors to use as a function input.  `test()` should be privvy to how many nearest neighbors there are, in order to correctly manipulate the `nearest_neighbors` vector.
+
+```c++
+std::vector<NearestNode> nearest_neighbors = {};
+
+if(nearest_neighbors.size() < k_nearest){
+    nearest_neighbors.push_back(temp);
+}
+else{
+    nearest_neighbors.push_back(temp);
+    sort_cut(nearest_neighbors);
+}
+
+int predicted_class = evaluateNeighbors(nearest_neighbors);
+```
+
+Note the two additional helper functions used to correctly evaluate the instance of the nearest neighbors.  Per the logic in the if else statement, if the size of the `nearest_neigbor` vector is less than how large it <i>should</i> be (i.e., if we are supposed to use 3 Nearest Neighbors, and the vector size is less than 3), then simply push that instance into the vector.
+
+If the vector is already of appropriate size, we still push that instance back into the vector, however we then run the `sort_cut()` function to effectively re-organize the data, and "cut" off the farthest neighbor.  Assuming we have a vector of size 5 already, we then add the sixth element to it, sort it via distance, and then chop off the lowest value via `pop_back()`, effectively ensuring that our vector is only 5 elements.
+
+Then, when we have iterated through all instances, we then run the `evaluateNeighbors()` function on our vector of `NearestNodes`. and then that returns the integer of the highest appearing instance.  Implementation is easy, as it just iterates through the vector, counts instances, and returns the highest appearing one.
+
+### Results and Differences
+
+So now we know how implementation works, but what exactly is the difference in data?  Below are the best feature subsets when using 1-NN (Default), 3-NN, and 5-NN respectively on the sample and personal datasets:
+
+![knnINFO](images/knn.png)
+
+### Analysis and Trends
+
+Once looking at the data, it's clear to see that in a much larger dataset, i.e., the Large Datasets, oftentimes, the best feature subset to use is still the same, however by increasing the amount of neighbors we check, we increase our accuracy by 1-2% in the case of Forward Selection.
+
+In terms of Backwards Elimination, often times, increasing the number of neighbors yieldest the highest accuracy for 3 out of 4 possible test cases.
+
 # Conclusion
 
+In conclusion, based on all experimentation and the entire design process, we know that using Nearest Neighbors, as well as Leave-One-Out Validator as a way to test function subsets is an effective one.  Further research could be to use a much more common and optimized Validator Method, such as K-Folding.
+
+## Challenges
+
+The main challenge with this program was more conceptual on how to visualize the data.  For example, plotting one feature on a graph is simply a one-dimensional graph, two features is two-dimensional, and three-features is three-dimensional.  It starts to get really confusing to mentally picture it, once we start comparing and plotting multiple features!
+
+Thankfully, most graphs can be solved via math, which our computers absolutely excel at.  Once I was able to generalize my code, I was able to create something that is completely functional, no matter what you throw at it.
+
+## Findings
+
+After multiple experiments, using Forward Selection rather than Backwards Elimination is not only much more efficient in runtime, but often finds a much better answer.  For further explanation, please refer to the earlier section where I discuss the differences between Forward Selection and Backwards Elimination.
+
+Not only that, but by pairing Forward Selection with Multiple Nearest Neighbors, we can effectively find better feature subsets and increase our accuracy, however this is not always the case, although it is much more likely when the dataset is very large.
 
 # Dataset Traces
 
