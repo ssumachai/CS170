@@ -1,7 +1,9 @@
 make.exe --dry-run --always-make --keep-going --print-directory
 make: Entering directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning'
 del *.exe
-g++ -o test.exe src/main.cpp src/setup.cpp src/algorithms.cpp src/problem.cpp
+ 
 g++ -o data.exe src/data_test.cpp src/dataset.cpp src/classifier.cpp src/validator.cpp
+ 
+g++ -o turnin.exe src/turnin.cpp src/setup.cpp src/classifier.cpp src/dataset.cpp src/problem.cpp src/algorithms.cpp src/validator.cpp
 make: Leaving directory 'c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning'
  

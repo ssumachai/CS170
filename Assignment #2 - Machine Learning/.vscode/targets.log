@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Tue May 24 14:07:56 2022
+# Make data base, printed on Fri May 27 18:55:06 2022
 
 # Variables
 
@@ -20,11 +20,11 @@ USERPROFILE = C:\Users\EndUser
 # environment
 LOCALAPPDATA = C:\Users\EndUser\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-417a8ca1-7943-480f-a9c8-2fa3ecaf9299-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-a197ae48-6ba0-4509-b123-0aadabac40cc-sock
 # makefile (from 'Makefile', line 3)
 SRC_DIR := src
 # environment
-VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS
+VSCODE_CWD = C:\Users\EndUser\Desktop\SCHOOL\CURR\CS170\PROGRAMMING ASSIGNMENTS\Assignment #2 - Machine Learning
 # environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
@@ -38,7 +38,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6076_HLVGTONNFJAZNWXP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4896_CELYUJEHDJEUWGJS
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -92,7 +92,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 6076
+VSCODE_PID = 4896
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -152,7 +152,8 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
 # automatic
-+F = $(notdir $+)
++F = $( 
+notdir $+)
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -214,7 +215,7 @@ CC = g++
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 # variable set hash-table stats:
-# Load=101/1024=10%, Rehash=0, Collisions=9/133=7%
+# Load=101/1024=10%, Rehash=0, Collisions=9/134=7%
 
 # Pattern-specific Variable Values
 
@@ -222,7 +223,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653172320): 11 files, no impossibilities.
+# . (key c:/Users/EndUser/Desktop/SCHOOL/CURR/CS170/PROGRAMMING ASSIGNMENTS/Assignment #2 - Machine Learning, mtime 1653702904): 11 files, no impossibilities.
 
 # 11 files, no impossibilities in 1 directories.
 
@@ -232,10 +233,17 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
 
 # Files
 
+turnin: src/turnin.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 8):
+	$(CC) -o turnin.exe $(SRC_DIR)/turnin.cpp $(SRC_DIR)/setup.cpp $(SRC_DIR)/classifier.cpp $(SRC_DIR)/dataset.cpp $(SRC_DIR)/problem.cpp $(SRC_DIR)/algorithms.cpp $(SRC_DIR)/validator.cpp
+
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-21 15:01:38
+#  Last modified 2022-05-27 12:40:15
 #  File has been updated.
 #  Successfully updated.
 
@@ -269,7 +277,7 @@ clean:
 # | := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'Makefile', line 14):
+#  recipe to execute (from 'Makefile', line 17):
 	-del *.exe
 
 # Not a target:
@@ -278,14 +286,13 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 
-all: clean test data-test
+all: clean data-test turnin
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
-# variable set hash-table sta 
-ts:
+# variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 # Not a target:
@@ -294,18 +301,24 @@ src/data_test.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+src/turnin.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 test: src/main.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 8):
+#  recipe to execute (from 'Makefile', line 11):
 	$(CC) -o test.exe $(SRC_DIR)/main.cpp $(SRC_DIR)/setup.cpp $(SRC_DIR)/algorithms.cpp $(SRC_DIR)/problem.cpp
 
 data-test: src/data_test.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 11):
+#  recipe to execute (from 'Makefile', line 14):
 	$(CC) -o data.exe $(SRC_DIR)/data_test.cpp $(SRC_DIR)/dataset.cpp $(SRC_DIR)/classifier.cpp $(SRC_DIR)/validator.cpp
 
 # Not a target:
@@ -315,19 +328,19 @@ data-test: src/data_test.cpp
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=9/1024=1%, Rehash=0, Collisions=0/29=0%
+# Load=11/1024=1%, Rehash=0, Collisions=0/32=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 157 B / avg = 8 B
-# current buf: size = 8174 B / used = 157 B / count = 19 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 21 / storage = 182 B / avg = 8 B
+# current buf: size = 8174 B / used = 182 B / count = 21 / avg = 8 B
 
-# strcache performance: lookups = 32 / hit rate = 40%
+# strcache performance: lookups = 35 / hit rate = 40%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Tue May 24 14:07:56 2022
+# Load=21/8192=0%, Rehash=0, Collisions=0/35=0%
+# Finished Make data base on Fri May 27 18:55:06 2022
 
  

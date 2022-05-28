@@ -27,7 +27,25 @@ int main(){
 
     std::vector<int> featuresToTest = {};
 
-    myClass->subsetInput(featuresToTest);
+    int set_to_use;
+
+    std::cout << "Enter whether you want to test custom subset, or all [1/2]: ";
+
+    std::cin >> set_to_use;
+
+    switch(set_to_use){
+        case 1:
+            myClass->subsetInput(featuresToTest);
+            break;
+        case 2:
+            for(int i = 0; i < 40; i++){
+                featuresToTest.push_back(i);
+            }
+            break;
+        default:
+            break;
+    }
+
 
     double subsetAccuracy = v->accuracy(featuresToTest);
 

@@ -424,6 +424,35 @@ Based on this, we should use only feature 2 as it yields the highest accuracy of
 
 ## Experiment 1 - Comparing Forward Selection vs Backwards Elimination
 
+### How much is actually being done? 
+
+In retrospect, you have to acknowledge how much time is spent computing the accuracy for a given subset.  When we do Forward Selection, we begin with 0 features, and that simply iterates through the dataset and obtains all instances and generates a simple percentage of it.
+
+Assuming we're running through the large dataset, we then analyzing 1000 instances with 40 features each.
+
+Then, you check one feature, 999 times.  Then you check another feature 999 times, then you check another feature 999 times.  For that first iteration, you essentially do `40 * 999` checks.  And that's just to determine which of the first 40 features is our best one.
+
+However, you have to realize that that is much cheaper than what <b>Backwards Elimination</b> is doing, because of the scale of the comparisons.
+
+### Differences
+
+Algorithm             | Default Rate | Starting Number of Features | Comparisons |
+--------------------- | ------------ | --------------------------- | ----------- |
+Forward Selection     | No Features  | 1                           | 1000
+Backwards Elimination | All Features | 40                          | 1000
+
+With Backwards Elimination, you need to compute the sum of the differences of all forty features.  Now do that 999 times just for that specific subset.  Then remove one, and do it again, and again, and again.  As a result, the runtime ends up being much longer because of how much work you do initially, and the scale of it.
+
+Forward Selection does the same amount of comparisons, but with less features.  So while the finish by checking all forty features, they only have to do it once with that particular subset.  Whereas Backwards Elimination has to do it 40 times, with all combinations of removing one subset!
+
+```
+// What Forward Selection Begins with
+Using features() {1} accuracy is 0.732
+
+// What Backwards Elimination Begins with
+Using features() {40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2} accuracy is 0.718
+```
+
 ## Experiment 2 - Not Normalizing the Data
 
 ## Experiment 3 - Effect of Number Neighbors (k)
